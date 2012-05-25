@@ -1,0 +1,229 @@
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <%if !@api_method.nil?%>
+    <h1 align="center">API Documentation</h1>
+    <p><b style="font-size:18px;"><%=@api_method.api_list.name%></b></p>
+
+    <p>
+      <b style="font-size:16px;"><i> <%= @api_method.name %> </i></b><br/>
+
+    </p>
+    <%if @api_method.description.present?%>
+      <p>
+        <b>Description:</b><br/>
+        <%= raw @api_method.description %>
+      </p>
+
+      <p>
+        <b>Resource url:</b><br/>
+        <%= @api_method.resource_url %><br/>
+      </p>
+
+
+      <p>
+        <b>Verb:</b><br/>
+        <%= @api_method.verb %>
+      </p>
+      <p>
+        <%if !@req_parameters.blank?%>
+          <b>Request parameter</b><br/>
+        <table border=2 cellpadding="10px">
+          <tr>
+            <th width="100px" style="padding: 5px 8px 5px 5px;"><b>Name</b></th><th width="300px" style="padding: 5px 8px 5px 5px;"><b>Description</b></th>
+            <th width="300px" style="padding: 5px 8px 5px 5px;"><b>Validation</b></th>
+          </tr>
+          <% @req_parameters.each do |param| %>
+            <tr>
+              <td width="100px" style="padding: 5px 8px 5px 5px;"><%= param.name%></td><td width="250px" style="padding: 5px 8px 5px 5px;"><%= param.description%></td>
+              <td width="250px" style="padding: 5px 8px 5px 5px;"><%= param.validation%></td>
+            </tr><%end%>	</table>
+      <%end%><br/>
+    </p>
+    <p>
+      <b>Request url:</b><br/>
+      <%= @api_method.request_url %><br/>
+      <% unless @current_user.nil?%>
+        <%if @current_user.edit_enable == true %>
+          <% if (@api_method.verb == "GET" || @api_method.verb == "get")%>
+            <a href="javascript:void(0);" class="params_get">Edit</a>
+            <br/>
+          <div class="response params_get_val" style="display:none;">
+            <form name="send_params" method="post" action="">
+              <div style="font-size: 14px;">Method
+                <select name="method" class="method">
+                  <% if (@api_method.verb == "GET" ||  @api_method.verb == "get") %>
+                    <option value="get" selected="selected">GET</option>
+                  <% elsif (@api_method.verb == "DELETE" ||  @api_method.verb == "delete") %>
+                    <option value="delete">DELETE</option>
+                  <% end %>
+                </select>
+                <input type="hidden" name="access_tk" id="access_tk" value="<%= @current_user.access_token%>"/>
+                <input type="text" name="url" class="url" value="<%= @current_user.api_url+@api_method.resource_url %>" style="margin: 0 0 0 10px;width: 519px;"/>
+              </div><br/><br/>
+              <div align="right" style="margin: 0 37px 0 0;">
+                <img src="/images/loading.gif"  class="api_loader" style="margin: 0 10px;vertical-align: middle;display:none;" />
+                <input type="submit" name="submit" value="Submit" class="params_submit"/>
+                <input type="button" name="cancel" value="Cancel" class="cancel"/>
+              </div>
+              <br/><br/>
+            </form>
+          </div>
+        <% end%>
+      <% end%>
+    <% end%>
+    </p>
+    <%if !@api_method.request_body.blank?%>
+      <p>
+        <b>Request body: </b><br/>
+      <div class="response params" style="display:block;">
+        <%=raw @api_method.request_body%>
+      </div>
+      <% unless @current_user.nil?%>
+        <%if @current_user.edit_enable == true %>
+          <% if (@api_method.verb == "POST" ||  @api_method.verb == "PUT" || @api_method.verb == "post"  ||  @api_method.verb == "put") %>
+            <a href="javascript:void(0);" class="params_edit" style="float: right;margin: 10px 75px 0 0;">Edit</a>
+            <div class="response params_update" style="display:none;">
+              <form name="send_params" method="post" action="">
+                <div style="font-size: 14px;">Method
+                  <select name="method" class="method">
+                    <% if (@api_method.verb == "POST" ||  @api_method.verb == "post") %>
+                      <option value="post">POST</option>
+                    <% elsif(@api_method.verb == "PUT"  ||  @api_method.verb == "put") %>
+                      <option value="put">PUT</option>
+                    <% end %>
+                  </select>
+                  <% if (@current_user.api_url.nil? || @current_user.api_url == '')
+                    request_url = 'http://localhost:3000'
+                  else
+                    request_url = @current_user.api_url
+                  end %>
+                  <input type="hidden" name="access_tk" id="access_tk" value="<%= @current_user.access_token%>"/>
+                  <input type="text" name="url" class="url" value="<%= request_url+@api_method.resource_url %>" style="margin: 0 0 0 10px;width: 519px;"/>
+                </div>
+                <textarea cols="80" rows="20" name="body" id="params_body" style="font-size: 14px; line-height: 20px;padding: 0;margin: 12px 0 0;">
+                </textarea><br/><br/>
+                <div align="right" style="margin: 0 37px 0 0;">
+                  <img src="/images/loading.gif" class="api_loader" style="margin: 0 10px;vertical-align: middle;display:none;" />
+                  <input type="submit" name="submit" value="Submit" class="params_submit"/>
+                  <input type="button" name="cancel" value="Cancel" class="cancel"/><br/><br/>
+                </div>
+              </form>
+            </div>
+          <%end%>
+        <%end%>
+      <%end%>
+      </p>
+    <%end%>
+    <p>
+      <%if !@res_parameters.blank?%>
+
+        <b>Response parameter</b><br/>
+      <table border=2 style="padding: 5px 8px 5px 5px;">
+        <tr>
+          <th width="150px" style="padding: 5px 8px 5px 5px;"><b>Name</b></th>
+          <th width="350px" style="padding: 5px 8px 5px 5px;"><b>Description</b></th>
+
+        </tr>
+        <% @res_parameters.each do |param| %>
+          <tr>
+            <td width="150px" style="padding: 5px 8px 5px 5px;"><%= param.name%></td><td width="350px" style="padding: 5px 8px 5px 5px;"><%= param.description%></td>
+
+          </tr><%end%>	</table><%end%><br/>
+    </p>
+    <p>
+      <b id="scroll_result">Success response:</b><br/>
+    <div class="response success_res">
+      <%= raw @api_method.success_response %>
+    </div><br/>
+    </p>
+    <p>
+      <b>Error response:</b><br/>
+    <div class="response">
+      <%= raw @api_method.error_response %>
+    </div>
+    <br/>
+    </p>
+  <%else%>
+    <div id="jq-interior"><img src="/images/work_in_progress.png" height="400px" style="display: block;margin-left: auto;margin-right: auto"></div>
+    <%end%>
+  <%end%>
+</div>
+
+<script type="text/javascript">
+  $('.params_edit').live('click',function(){
+    $(".response.params_update").css({'display' : 'block'});
+    $(".response.params").css({'display' : 'none'});
+    $(".params_edit").css({'display' : 'none'});
+    $("textarea#params_body").val($(".response.params").text());
+  });
+  $('.params_get').live('click',function(){
+    $(".response.params_get_val").css({'display' : 'block'});
+    $(".params_get").css({'display' : 'none'});
+  });
+  $('.cancel').live('click',function(){
+    window.location.reload();
+  });
+  //~ test_api_request
+  $('.params_submit').live('click',function(){
+    access_token = $("#access_tk").val();
+    api_url = $(".url").val();
+    method = $(".method").val();
+    $(".api_loader").show();
+    switch(method)
+    {
+      case 'post':
+        url_link = '/post_api_request'
+        break;
+      case 'put':
+        url_link = '/put_api_request'
+        break;
+      case 'get':
+        url_link = '/get_api_request'
+        break;
+      default:
+        url_link = '/delete_api_request'
+    }
+    res = ''
+    if($("#params_body").val()) {
+      value = $("#params_body").val();
+      res = value.replace(/\s+/g, '');
+    }
+    $.ajax({
+      url : url_link,
+      type: 'get',
+      data: { body :	res, method : method, url : api_url, access_token : access_token },
+      success:function(data){
+        $(".response.success_res").html("<p style='font-size:13px; line-height:24px;'>"+data['response']+"</p>");
+        if(data['status'] == "success") {
+          if($(".response.success_res").hasClass("success")) {
+            $(".response.success_res").removeClass("failure");
+          } else {
+            $(".response.success_res").removeClass("failure");
+            $(".response.success_res").addClass(data['status']);
+          }
+        }else if(data['status'] == "failure") {
+          if($(".response.success_res").hasClass("failure")) {
+            $(".response.success_res").removeClass("success");
+          } else {
+            $(".response.success_res").removeClass("success");
+            $(".response.success_res").addClass(data['status']);
+          }
+        }
+        $(".api_loader").hide();
+        goToByScroll("scroll_result");
+      },
+      error: function (request, status, error) {
+        $(".response.success_res").text(request.responseText);
+        $(".response.success_res").removeClass('success');
+        $(".response.success_res").removeClass('failure');
+        $(".api_loader").hide();
+        goToByScroll("scroll_result");
+      }
+    });
+    return false;
+  });
+		
+  function goToByScroll(id){
+    $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
+  }
+</script>
+

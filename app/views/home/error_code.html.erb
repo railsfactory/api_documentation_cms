@@ -1,0 +1,36 @@
+<style type="text/css">
+  table.hovertable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+  }
+  table.hovertable th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+  }
+  table.hovertable tr {
+    background-color:#d4e3e5;
+  }
+  table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+  }
+</style>
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <h1 class="page-title" style="font-size:16px;text-align:center;">Error Codes</h1>
+  <p>&nbsp;</p>
+  <table border=1 class="hovertable">
+    <th style="width:200px;">Error Code</th>
+    <th style="width:400px;"> Reason </th>
+    <th style="width:400px;"> Message </th>
+    <%= home_error_codes(@error) %>
+  </table>
+</div>

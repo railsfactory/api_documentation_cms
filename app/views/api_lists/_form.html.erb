@@ -1,0 +1,30 @@
+<%= form_for(@api_list) do |f| %>
+  <% if @api_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@api_list.errors.count, "error") %> prohibited this api_list from being saved:</h2>
+
+      <ul>
+        <%= list_errors(@api_list)  %>
+        <!--<% @api_list.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>-->
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <!--<div class="field">
+  <%#= f.label :status %><br />
+  <%#= f.check_box :status %>
+  </div>-->
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

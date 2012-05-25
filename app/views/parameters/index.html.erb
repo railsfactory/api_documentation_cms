@@ -1,0 +1,20 @@
+<h1>Listing parameters</h1>
+
+<table>
+  <tr>
+    <th>Api method</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Validation</th>
+    <th>Is request</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= parameter_lists(@parameters) %>
+</table>
+
+<br />
+
+<%= link_to 'New Parameter', new_parameter_path %>

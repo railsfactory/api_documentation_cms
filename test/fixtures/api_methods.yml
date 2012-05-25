@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  api_list_id: 1
+  name: MyString
+  description: MyText
+  resource_url: MyString
+  verb: MyString
+  request_url: MyString
+  success_response: MyText
+  error_responce: MyText
+
+two:
+  api_list_id: 1
+  name: MyString
+  description: MyText
+  resource_url: MyString
+  verb: MyString
+  request_url: MyString
+  success_response: MyText
+  error_responce: MyText

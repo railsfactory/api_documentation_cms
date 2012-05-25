@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  api_method_id: 1
+  name: MyString
+  description: MyText
+  validation: MyText
+  is_request: false
+
+two:
+  api_method_id: 1
+  name: MyString
+  description: MyText
+  validation: MyText
+  is_request: false

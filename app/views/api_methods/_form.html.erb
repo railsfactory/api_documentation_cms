@@ -1,0 +1,136 @@
+<script language="javascript">
+  var intTextBox=0;
+  var intTextBox1=0;
+  function add() {
+    intTextBox = intTextBox + 1;
+    var parentelement = document.createElement("div");
+    var foo = document.getElementById("fooBar");
+
+    var child_element1 = document.createElement("input");
+    var child_element2 = document.createElement("textarea");
+    var child_element3 = document.createElement("textarea");
+    var child_element4 = document.createElement("input");
+
+    child_element1.setAttribute("type", "text");
+    child_element2.setAttribute("rows", "3");
+    child_element3.setAttribute("rows", "3");
+    child_element4.setAttribute("type", "checkbox");
+
+    parentelement.setAttribute("id", "element"+intTextBox);
+    child_element1.setAttribute("id", "textbox_"+intTextBox);
+    child_element2.setAttribute("id", "textarea_description_"+intTextBox);
+    child_element3.setAttribute("id", "textarea_validation_"+intTextBox);
+    child_element4.setAttribute("id", "checkbox_request_"+intTextBox);
+
+    parentelement.setAttribute("name", "api_list[element"+intTextBox+"]");
+    child_element2.setAttribute("name", "api_list[parameter"+intTextBox+"]"+"[description"+intTextBox+"]");
+    child_element3.setAttribute("name", "api_list[parameter"+intTextBox+"]"+"[validation"+intTextBox+"]");
+    child_element1.setAttribute("name", "api_list[parameter"+intTextBox+"]"+"[name"+intTextBox+"]");
+    child_element4.setAttribute("name", "api_list[parameter"+intTextBox+"]"+"[request"+intTextBox+"]");
+
+    parentelement.appendChild(child_element1);
+    parentelement.appendChild(child_element2);
+    parentelement.appendChild(child_element3);
+    parentelement.appendChild(child_element4);
+    foo.appendChild(parentelement);
+  }
+
+  function remove()
+  {
+    if(intTextBox != 0) {
+      var contentID = document.getElementById("fooBar");
+      contentID.removeChild(document.getElementById("element"+intTextBox));
+      intTextBox = intTextBox-1;
+    }
+  }
+</script>
+
+<%= form_for(@api_method) do |f| %>
+  <% if @api_method.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@api_method.errors.count, "error") %> prohibited this api_method from being saved:</h2>
+
+      <ul>
+        <% @api_method.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--<div class="field">
+  <%#= f.label :api_list_id %><br />
+  <%#= f.text_field :api_list_id %>
+  </div-->
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+  <%#= f.text_area :description,:rows=>8%>
+    <%= tinymce_tag('api_method[description]', @api_method.description) %>
+  </div>
+  <div class="field">
+    <%= f.label :resource_url %><br />
+    <%= f.text_field :resource_url %>
+  </div>
+  <div class="field">
+    <%= f.label :verb %><br />
+    <%= f.text_field :verb %>
+  </div>
+  <div class="field">
+    <%= f.label :request_url %><br />
+    <%= f.text_field :request_url %>
+  </div>
+  <div class="field">
+    <%= f.label :request_body %><br />
+    <%= tinymce_tag('api_method[request_body]', @api_method.request_body) %>  </div>
+  <div class="field">
+    <div class="field">
+      <%= f.label :notes %><br />
+      <%= tinymce_tag('api_method[notes]', @api_method.notes) %>  </div>
+    <div class="field">
+      <%= f.label :success_response %><br />
+  <%#= f.text_area :success_response,:rows=>8 %>
+      <%= tinymce_tag('api_method[success_response]', @api_method.success_response) %>  </div>
+    <div class="field">
+      <%= f.label :error_responce %><br />
+  <%#= f.text_area :error_response,:rows=>8 %>
+      <%= tinymce_tag('api_method[error_response]', @api_method.error_response ) %>
+    </div>
+
+    <table>
+      <tr>
+        <th width="150px" style="font-size:12px;text-align:left;">Name</th>
+        <th width="150px" style="font-size:12px;text-align:left;">Description</th>
+        <th width="170px" style="font-size:12px;text-align:left;">Validation</th>
+        <th width="150px" style="font-size:12px;text-align:left;">is Request?</th>
+      </tr>
+    </table>
+    <div class="field">
+      <% @api_method.parameters.each_with_index do |project,i| %>
+        <%= f.fields_for :parameters, project do |project_fields| %>
+          <%= project_fields.text_field :name,:name=>"parameter[parameter#{i}][name#{i}]" %>
+          <%= project_fields.text_area :description,:name=>"parameter[parameter#{i}][description#{i}]",:rows=>3,:cols=>20 %>
+          <%= project_fields.text_area :validation,:name=>"parameter[parameter#{i}][validation#{i}]",:rows=>3,:cols=>20  %>
+          <%= project_fields.check_box :is_request,:name=>"parameter[parameter#{i}][is_request#{i}]"%>
+          <%=project_fields.hidden_field :id,:name=>"parameter[parameter#{i}][id]",:value=>project.id%>
+          <%=link_to "delete",delete_parameter_path(project.id)%>
+        <% end %>
+      <% end %>
+    </div>
+    <div align="right">
+      <input type="button" value="Add" onclick="add()"/>
+      <input type="button" value="remove" onclick="remove()"/>
+    </div>
+    <div id="fooBar"></div>
+    <%=hidden_field_tag 'id', @list_id%>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>

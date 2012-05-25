@@ -1,0 +1,62 @@
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Api list:</b>
+    <%= @api_method.api_list_id %>
+  </p>
+
+  <p>
+    <b>Name:</b>
+    <%= @api_method.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @api_method.description %>
+  </p>
+
+  <p>
+    <b>Resource url:</b>
+    <%= @api_method.resource_url %>
+  </p>
+
+  <p>
+    <b>Verb:</b>
+    <%= @api_method.verb %>
+  </p>
+
+  <p>
+    <b>Request url:</b>
+    <%= @api_method.request_url %>
+  </p>
+  <p>
+    <b>Request body:</b>
+    <%= @api_method.request_body %>
+  </p>
+
+  <p>
+    <b>Success response:</b>
+    <%=raw @api_method.success_response %>
+  </p>
+
+  <p>
+    <b>Error response:</b>
+    <%=raw @api_method.error_response %>
+  </p>
+  <p>Parameters</p>
+  <p>
+  <table>
+    <tr><th width="180px" style="font-size:14px;text-align:left">Name</th>
+      <th width="180px" style="font-size:14px;text-align:left">Description</th>
+      <th width="180px" style="font-size:14px;text-align:left">Validation</th>
+      <th width="180px" style="font-size:14px;text-align:left">is Request?</th></tr>
+    <%= api_method_params(@api_method) %>
+  </table>
+</p>
+
+<p style="font-size:16px;">
+  <%= link_to 'Edit', edit_api_method_path(@api_method) %> |
+  <%= link_to 'Back', api_methods_path %>
+</p>
+</div>

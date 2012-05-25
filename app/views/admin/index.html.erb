@@ -1,0 +1,970 @@
+<script>$(function(){
+  $("div[id=examples]").each(function(){
+    $(this).siblings("div:first").find("div.desc").after(
+    $(this).find("div.example:has(#demo):first").remove().clone());
+
+    if ( !$("div.example", this).length )
+      $(this).remove();
+  });
+
+  $("div.entry")
+  .children("p").remove().end()
+  .find("ul:first li").each(function(){
+    if ( !$(this).parent().siblings( $("a",this).attr("href") ).length )
+      $(this).remove();
+  }).end()
+  .not(".ui")
+  .tabs();
+
+  $("div.args > br").remove();
+
+  $("div.example")
+  .children("p").remove().end()
+  .tabs();
+
+  var keywords = "String,Number,Object,Options,Array,Function,Callback,Selector,Event,Element,Integer,Float,Boolean".split(",");
+
+  $("td.default span, td.type").each(function(){
+    var html = this.innerHTML;
+    jQuery.each(keywords, function(i,key){
+      html = html.replace(new RegExp(key, "ig"), "<a href='/Types#" + key + "'>" + key + "</a>");
+    });
+    this.innerHTML = html;
+  });
+
+  $("div[id=source]").each(function(){
+    var source = $("pre", this).html()
+    .replace(/<\/?a.*?>/ig, "")
+    .replace(/<\/?strong.*?>/ig, "")
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+
+    //var items = [];
+    //source = source.replace(/\s*<(link|script).*?>\s\*/g, function(m){
+    //items.push(m);
+    //return "";
+    //}).replace("<style id='flashfirebugstyle' type='text/css'>object,embed{visibility:hidden !important;}</style></head>", items.join("") + "<style id='flashfirebugstyle' type='text/css'>object,embed{visibility:hidden !important;}</style></head>")
+    //*/
+
+    var iframe = document.createElement("iframe");
+    iframe.src = "/index-blank.html";
+    iframe.width = "100%";
+    iframe.height = $(this).prev().attr("rel") || "125";
+    iframe.style.border = "none";
+    $(this).prev().append(iframe);
+
+
+    $(window).load(function(){
+      var doc = iframe.contentDocument || iframe.contentWindow.document;
+      source = source
+      .replace(/<script>([^<])/g,"<script>window.onload = (function(){\ntry{$1")
+      .replace(/([^>])<\/sc/g,  '$1\n}catch(e){}});</sc');
+
+      source = source
+      .replace("<style id='flashfirebugstyle' type='text/css'>object,embed{visibility:hidden !important;}</style></head>", "<style>html,body{border:0; margin:0; padding:0;}</style><style id='flashfirebugstyle' type='text/css'>object,embed{visibility:hidden !important;}</style></head>");
+
+      doc.open();
+      doc.write( source );
+      doc.close();
+    });
+
+  });
+});</script>
+<link rel="shortcut icon" href="http://static.jquery.com/favicon.ico" type="image/x-icon">
+<style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/skins/monobook/main.css?9"; /*]]>*/</style>
+<!--[if lt IE 5.5000]><style type="text/css">@import "/skins/monobook/IE50Fixes.css";</style><![endif]-->
+<!--[if IE 5.5000]><style type="text/css">@import "/skins/monobook/IE55Fixes.css";</style><![endif]-->
+<!--[if IE 6]><style type="text/css">@import "/skins/monobook/IE60Fixes.css";</style><![endif]-->
+<!--[if IE 7]><style type="text/css">@import "/skins/monobook/IE70Fixes.css?1";</style><![endif]-->
+<!--[if lt IE 7]><script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+<!-- Head Scripts -->
+</head>
+
+
+
+
+
+<body id="jq-interior" class="mediawiki ns-0 ltr jq-enhanced">
+
+  <div id="jq-siteContain">
+    <div id="jq-header">
+      <div id="jq-primaryNavigation">
+      </div><!-- /#primaryNavigation -->
+
+      <div id="jq-secondaryNavigation">
+      </div><!-- /#secondaryNavigation -->
+
+    </div><!-- /#header -->
+
+    <div id="jq-content" class="jq-clearfix">
+
+      <div style="min-height: 1574.4em;" id="jq-interiorNavigation">
+        <div class="jq-portlet" id="jq-p-Getting-Started">
+          <h5>Getting Started</h5>
+          <div class="jq-pBody">
+
+            <ul>
+
+              <li id="jq-n-Main-Page"><a href="http://docs.jquery.com/Main_Page">Main Page</a></li>
+              <li id="jq-n-Downloading-jQuery"><a href="http://docs.jquery.com/Downloading_jQuery">Downloading jQuery</a></li>
+
+              <li id="jq-n-How-jQuery-Works"><a href="http://docs.jquery.com/How_jQuery_Works">How jQuery Works</a></li>
+              <li id="jq-n-FAQ"><a href="http://docs.jquery.com/Frequently_Asked_Questions">FAQ</a></li>
+              <li id="jq-n-Tutorials"><a href="http://docs.jquery.com/Tutorials">Tutorials</a></li>
+
+              <li id="jq-n-Using-jQuery-with-Other-Libraries"><a href="http://docs.jquery.com/Using_jQuery_with_Other_Libraries">Using jQuery with Other Libraries</a></li>
+
+              <li id="jq-n-Variable-Types"><a href="http://docs.jquery.com/Types">Variable Types</a></li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="jq-portlet" id="jq-p-API-Reference">
+          <h5>API Reference</h5>
+
+          <div class="jq-pBody">
+
+            <ul>
+              <li id="jq-n-jQuery-Core"><a href="http://docs.jquery.com/Core">jQuery Core</a></li>
+              <li id="jq-n-Selectors"><a href="http://docs.jquery.com/Selectors">Selectors</a></li>
+
+              <li id="jq-n-Attributes"><a href="http://docs.jquery.com/Attributes">Attributes</a></li>
+              <li id="jq-n-Traversing"><a href="http://docs.jquery.com/Traversing">Traversing</a></li>
+              <li id="jq-n-Manipulation"><a href="http://docs.jquery.com/Manipulation">Manipulation</a></li>
+
+              <li id="jq-n-CSS"><a href="http://docs.jquery.com/CSS">CSS</a></li>
+              <li id="jq-n-Events"><a href="http://docs.jquery.com/Events">Events</a></li>
+              <li id="jq-n-Effects"><a href="http://docs.jquery.com/Effects">Effects</a></li>
+
+              <li id="jq-n-Ajax"><a href="http://docs.jquery.com/Ajax">Ajax</a></li>
+              <li id="jq-n-Utilities"><a href="http://docs.jquery.com/Utilities">Utilities</a></li>
+              <li id="jq-n-jQuery-UI"><a href="http://docs.jquery.com/UI">jQuery UI</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="jq-portlet" id="jq-p-Plugins">
+
+          <h5>Plugins</h5>
+          <div class="jq-pBody">
+            <ul>
+              <li id="jq-n-Plugin-Repository"><a href="http://jquery.com/plugins/">Plugin Repository</a></li>
+
+              <li id="jq-n-Authoring"><a href="http://docs.jquery.com/Plugins/Authoring">Authoring</a></li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="jq-portlet" id="jq-p-Support">
+          <h5>Support</h5>
+          <div class="jq-pBody">
+
+            <ul>
+
+              <li id="jq-n-Mailing-List-and-Chat"><a href="http://docs.jquery.com/Discussion">Mailing List and Chat</a></li>
+              <li id="jq-n-Submit-New-Bug"><a href="http://jquery.com/dev/bugs/new/">Submit New Bug</a></li>
+              <li id="jq-n-Commercial-Support"><a href="http://docs.jquery.com/Commercial_Support">Commercial Support</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="jq-portlet" id="jq-p-About-jQuery">
+
+          <h5>About jQuery</h5>
+
+          <div class="jq-pBody">
+            <ul>
+              <li id="jq-n-Contributors"><a href="http://docs.jquery.com/Contributors">Contributors</a></li>
+
+              <li id="jq-n-History-of-jQuery"><a href="http://docs.jquery.com/History_of_jQuery">History of jQuery</a></li>
+              <li id="jq-n-Sites-Using-jQuery"><a href="http://docs.jquery.com/Sites_Using_jQuery">Sites Using jQuery</a></li>
+
+              <li id="jq-n-Browser-Compatibility"><a href="http://docs.jquery.com/Browser_Compatibility">Browser Compatibility</a></li>
+              <li id="jq-n-License"><a href="http://docs.jquery.com/Licensing">Licensing</a></li>
+
+              <li id="jq-n-Donate"><a href="http://docs.jquery.com/Donate">Donate</a></li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="jq-portlet" id="p-tb">
+          <h5>Toolbox</h5>
+          <div class="jq-pBody">
+            <ul>
+              <li id="t-whatlinkshere"><a href="http://docs.jquery.com/index.php?title=Special:Whatlinkshere&amp;target=Tutorials">What links here</a></li>
+              <li id="t-recentchangeslinked"><a href="http://docs.jquery.com/index.php?title=Special:Recentchangeslinked&amp;target=Tutorials">Related changes</a></li>
+              <li id="t-upload"><a href="http://docs.jquery.com/Special:Upload">Upload file</a></li>
+              <li id="t-specialpages"><a href="http://docs.jquery.com/Special:Specialpages">Special pages</a></li>
+              <li id="t-print"><a href="http://docs.jquery.com/action/render/Tutorials">Printable version</a></li>				<li id="t-permalink"><a href="http://docs.jquery.com/index.php?title=Tutorials&amp;oldid=20655">Permanent link</a></li>			</ul>
+          </div>
+        </div>
+
+        <div id="jq-p-cactions" class="jq-portlet">
+          <h5>Views</h5>
+          <div class="jq-pBody">
+            <ul>
+              <li id="jq-ca-nstab-main" class="selected"><a href="http://docs.jquery.com/Tutorials">Article</a></li>
+              <li id="jq-ca-talk"><a href="http://docs.jquery.com/Talk:Tutorials">Discussion</a></li>
+              <li id="jq-ca-edit"><a href="http://docs.jquery.com/action/edit/Tutorials">Edit</a></li>
+              <li id="jq-ca-history"><a href="http://docs.jquery.com/action/history/Tutorials">History</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="jq-portlet" id="jq-p-personal">
+          <h5>Personal tools</h5>
+          <div class="jq-pBody">
+            <ul>
+              <li id="jq-pt-login"><a href="http://docs.jquery.com/index.php?title=Special:Userlogin&amp;returnto=Tutorials">Log in / create account</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div><!-- /#interiorNavigation -->
+
+
+
+
+
+      <div style="min-height: 1574.4em;" id="jq-primaryContent">
+        <div id="column-content">
+          <div id="docs-content">
+            <a name="top" id="top"></a>
+            <!--<div style="background:#efefff; border:#9f9fff 1px solid; padding: 10px;"><strong>UPDATE:</strong> The jQuery API documentation has been completely rewritten and moved to <a href="http://api.jquery.com/">api.jquery.com</a>. More details <a href="http://jquery14.com/pre-release-1/new-jquery-api-site">can be found on the jQuery blog</a>.</div>-->
+            <h1 class="firstHeading">Tutorials</h1>
+            <div id="bodyContent">
+              <h3 id="siteSub">From jQuery JavaScript Library</h3>
+              <div id="contentSub"></div>
+              <div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+              <div style="float: right; margin-left: 10px; padding: 5px; border: 1px solid rgb(221, 221, 221); background: none repeat scroll 0% 0% rgb(245, 245, 245);">
+              </div>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=1" title="Edit section: English Tutorials">edit</a>]</div><a name="English_Tutorials"></a><h2> English Tutorials </h2>
+              <ul><li> <a href="http://docs.jquery.com/Plugins/Authoring" class="external text" title="http://docs.jquery.com/Plugins/Authoring">jQuery Plugin Authoring</a> Learn how to develop a jQuery plugin.
+                </li><li> <a href="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner" class="external text" title="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner">jQuery Beginner Tutorial in 18 minutes</a> Learn to build jQuery plugins from scratch - an 18 minute tutorial.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=2" title="Edit section: General Tutorials">edit</a>]</div><a name="General_Tutorials"></a><h3> General Tutorials </h3>
+              <p>These tutorials cover the fundamentals of the jQuery library - covering a diverse number of topics.
+              </p>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:How_jQuery_Works" title="Tutorials:How jQuery Works">How jQuery Works</a></b> by <a href="http://ejohn.org/" class="external text" title="http://ejohn.org/">John Resig.</a><br>A basic introduction to jQuery and the concepts that you need to know to use it.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery" title="Tutorials:Getting Started with jQuery">Getting Started with jQuery</a></b> by <a href="http://bassistance.de/" class="external text" title="http://bassistance.de/">Jörn Zaefferer</a><br>Goes through the basics of jQuery, all the way up to building plugins.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a>, <a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Plugins" title="Category:Plugins">Plugins</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:jQuery_For_Designers" title="Tutorials:jQuery For Designers">jQuery For Designers</a></b> by <a href="http://www.markpanay.com/" class="external text" title="http://www.markpanay.com/">Mark Panay</a><br>Examples of writing Unobtrusive JavaScript to add simple behavior to a web page.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Live_Examples_of_jQuery" title="Tutorials:Live Examples of jQuery">Live Examples of jQuery</a></b> by <a href="http://codylindley.com/" class="external text" title="http://codylindley.com/">Cody Lindley</a><br>An interactive demonstration of the basics behind jQuery.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></small>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=3" title="Edit section: Interface">edit</a>]</div><a name="Interface"></a><h3> Interface </h3>
+              <ul><li> <a href="http://wayfarerweb.com/animate-example.php" class="external text" title="http://wayfarerweb.com/animate-example.php">Introduction to jQuery Animation</a> by <a href="http://abelmohler.com/" class="external text" title="http://abelmohler.com/">Abel Mohler</a>
+                </li></ul>
+              <p><br>
+              </p>
+              <ul><li> <a href="http://www.noupe.com/tutorial/51-best-of-jquery-tutorials-and-examples.html" class="external text" title="http://www.noupe.com/tutorial/51-best-of-jquery-tutorials-and-examples.html">51+ Best of jQuery Tutorials and Examples</a> by <a href="http://techfrog.org/" class="external text" title="http://techfrog.org/">Sydney Monis</a>
+                </li></ul>
+              <ul><li> <a href="http://www.webdesignerwall.com/tutorials/jquery-tutorlals-for-designers/" class="external text" title="http://www.webdesignerwall.com/tutorials/jquery-tutorlals-for-designers/">jQuery Tutorials for Designers</a> by <a href="http://techfrog.org/" class="external text" title="http://techfrog.org/">Sydney Monis</a>
+                </li></ul>
+              <ul><li> <a href="http://www.tripbase.com/code/highlightTutorial.html" class="external text" title="http://www.tripbase.com/code/highlightTutorial.html">Highlight words in an html page</a> by <a href="http://www.tripbase.com/" class="external text" title="http://www.tripbase.com">Reuven</a>
+                </li></ul>
+              <ul><li> <a href="http://www.authenticsociety.com/blog/jQueryTabsPlugin" class="external text" title="http://www.authenticsociety.com/blog/jQueryTabsPlugin">jQuery Tabs</a> Build simple jQuery Tabs controls (Beginner's Tutorials) by <a href="http://www.grigoriysidelnikov.com/" class="external text" title="http://www.grigoriysidelnikov.com">Greg Sidelnikov</a>
+                </li></ul>
+              <ul><li> <a href="http://eligeske.com/jquery/jquery-star-comment-rating/" class="external text" title="http://eligeske.com/jquery/jquery-star-comment-rating/">Create a Roll Over Star Comment Rating with JQuery</a> by <a href="http://eligeske.com/" class="external text" title="http://eligeske.com">Eli Geske</a>
+                </li></ul>
+              <ul><li> <a href="http://webcloud.se/article/Form_validation_with_jQuery_from_scratch/" class="external text" title="http://webcloud.se/article/Form_validation_with_jQuery_from_scratch/">Form validation with jQuery from scratch </a>  by  <a href="http://webcloud.se/" class="external text" title="http://webcloud.se/">Daniel </a>
+                </li></ul>
+              <ul><li> <a href="http://sixrevisions.com/tutorials/javascript_tutorial/create-a-slick-and-accessible-slideshow-using-jquery/" class="external text" title="http://sixrevisions.com/tutorials/javascript_tutorial/create-a-slick-and-accessible-slideshow-using-jquery/">Create an Accessible Slideshow Using jQuery </a> by <a href="http://sixrevisions.com/" class="external text" title="http://sixrevisions.com/">Jacob Gube </a>
+                </li></ul>
+              <ul><li> <a href="http://valums.com/vertical-scrolling-menu/" class="external text" title="http://valums.com/vertical-scrolling-menu/">Create a Vertical Scrolling Menu with Tooltips </a> by <a href="http://valums.com/" class="external text" title="http://valums.com/">Andrew Valums </a>
+                </li></ul>
+              <ul><li> <a href="http://valums.com/scroll-menu-jquery/" class="external text" title="http://valums.com/scroll-menu-jquery/">Create a Horizontal Scrolling Menu with CSS and jQuery </a> by <a href="http://valums.com/" class="external text" title="http://valums.com/">Andrew Valums </a>
+                </li></ul>
+              <ul><li> <a href="http://www.webair.it/blog/2009/03/11/slide-and-hide-section-with-jquery/" class="external text" title="http://www.webair.it/blog/2009/03/11/slide-and-hide-section-with-jquery/">Slide and Hide Section with jQuery </a> by <a href="http://www.webair.it/" class="external text" title="http://www.webair.it/">WebAir </a>
+                </li></ul>
+              <ul><li> <a href="http://www.authenticsociety.com/blog/JavaScript_DollarSign" class="external text" title="http://www.authenticsociety.com/blog/JavaScript_DollarSign">The Dollar Sign</a> What is the Significance of the Dollar Sign ($)?
+                </li></ul>
+              <ul><li> <a href="http://yensdesign.com/2008/09/how-to-create-a-stunning-and-smooth-popup-using-jquery/" class="external text" title="http://yensdesign.com/2008/09/how-to-create-a-stunning-and-smooth-popup-using-jquery/">Smooth and Stunning Popup from scratch</a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li></ul>
+              <ul><li> <a href="http://yensdesign.com/2008/12/create-a-smooth-tabbed-menu-in-jquery/" class="external text" title="http://yensdesign.com/2008/12/create-a-smooth-tabbed-menu-in-jquery/">Create a smooth tabbed menu in jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign) </a>
+                </li></ul>
+              <ul><li> <a href="http://yensdesign.com/2009/01/how-validate-forms-both-sides-using-php-jquery/" class="external text" title="http://yensdesign.com/2009/01/how-validate-forms-both-sides-using-php-jquery/">How to Validate Forms in both sides using PHP and jQuery</a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li></ul>
+              <ul><li> <a href="http://yensdesign.com/2009/01/improving-search-boxes-with-jquery/" class="external text" title="http://yensdesign.com/2009/01/improving-search-boxes-with-jquery/">Improving search boxes with jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign) </a>
+                </li></ul>
+              <ul><li> <a href="http://nettuts.com/tutorials/javascript-ajax/submit-a-form-without-page-refresh-using-jquery/" class="external text" title="http://nettuts.com/tutorials/javascript-ajax/submit-a-form-without-page-refresh-using-jquery/">Submit a Form Without Refresh Using jQuery </a> by <a href="http://www.nettuts.com/" class="external text" title="http://www.nettuts.com">NETTUTS </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/106/jquery-tabbed-interfacetabbed-structure-menu-tutorial" class="external text" title="http://www.queness.com/post/106/jquery-tabbed-interfacetabbed-structure-menu-tutorial">Create a tabbed content area </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/77/simple-jquery-modal-window-tutorial" class="external text" title="http://www.queness.com/post/77/simple-jquery-modal-window-tutorial">Simple jQuery Modal Window Tutorial </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://visionmasterdesigns.com/tutorial-ajax-interface-menu-using-jqueryphp/" class="external text" title="http://visionmasterdesigns.com/tutorial-ajax-interface-menu-using-jqueryphp/">AJAX Interface using JQuery/PHP </a> by <a href="http://www.visionmasterdesigns.com/" class="external text" title="http://www.visionmasterdesigns.com">Vision Master Designs </a>
+                </li></ul>
+              <ul><li> <a href="http://webcloud.se/article/Building_modal_panels_with_jQuery" class="external text" title="http://webcloud.se/article/Building_modal_panels_with_jQuery">Building modal panels with jQuery </a> by <a href="http://www.webcloud.se/" class="external text" title="http://www.webcloud.se">Daniel </a>
+                </li></ul>
+              <ul><li> <a href="http://www.chazzuka.com/blog/?p=87" class="external text" title="http://www.chazzuka.com/blog/?p=87">Jquery Image Loader</a> add loading animation before image completely loaded by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design </a>
+                </li></ul>
+              <ul><li> <a href="http://michaeljacobdavis.com/tutorials/statesavingaccordion.html" class="external text" title="http://michaeljacobdavis.com/tutorials/statesavingaccordion.html">State-Saving jQuery Accordion Menu Without Reloading the Page</a> by <a href="http://www.michaeljacobdavis.com/" class="external text" title="http://www.michaeljacobdavis.com/">Michael Jacob Davis</a>
+                </li></ul>
+              <ul><li> <a href="http://www.ispeakwebstuff.co.uk/2008/12/a-basic-image-gallery-the-jquery-way/" class="external text" title="http://www.ispeakwebstuff.co.uk/2008/12/a-basic-image-gallery-the-jquery-way/">Creating a very basic Image Gallery in JQuery</a> by <a href="http://www.jackfranklin.co.uk/" class="external text" title="http://www.jackfranklin.co.uk">Jack Franklin</a>
+                </li></ul>
+              <ul><li> <a href="http://justinfarmer.com/?p=6" class="external text" title="http://justinfarmer.com/?p=6">Disjointed rollovers in jQuery</a> by <a href="http://justinfarmer.com/" class="external text" title="http://justinfarmer.com">Justin Farmer</a>
+                </li></ul>
+              <ul><li> <a href="http://justinfarmer.com/?p=14" class="external text" title="http://justinfarmer.com/?p=14">Image Enlargement with .animate()</a> by <a href="http://justinfarmer.com/" class="external text" title="http://justinfarmer.com">Justin Farmer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.michaeljacobdavis.com/tutorials/jqueryfaq.html" class="external text" title="http://www.michaeljacobdavis.com/tutorials/jqueryfaq.html">jQuery Frequently Asked Questions (FAQ)</a> by <a href="http://www.michaeljacobdavis.com/" class="external text" title="http://www.michaeljacobdavis.com/">Michael Jacob Davis</a>
+                </li></ul>
+              <ul><li> <a href="http://www.chazzuka.com/blog/?p=88" class="external text" title="http://www.chazzuka.com/blog/?p=88">Ajaxify your web pages using jQuery</a> by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design</a>
+                </li></ul>
+              <ul><li> <a href="http://www.chazzuka.com/blog/?p=82" class="external text" title="http://www.chazzuka.com/blog/?p=82">PHP jQuery Ajax Login</a> by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design</a>
+                </li></ul>
+              <ul><li> <a href="http://www.chazzuka.com/blog/?p=90" class="external text" title="http://www.chazzuka.com/blog/?p=90">SEO friendly ajax</a> by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design</a>
+                </li></ul>
+              <ul><li> <a href="http://dryan.com/jquery-lightbox-tutorial" class="external text" title="http://dryan.com/jquery-lightbox-tutorial">Building a Lightbox</a> by <a href="http://dryan.com/" class="external text" title="http://dryan.com">dryan</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/152/simple-jquery-image-slide-show-with-semi-transparent-caption" class="external text" title="http://www.queness.com/post/152/simple-jquery-image-slide-show-with-semi-transparent-caption">Simple JQuery Image Slide Show with Semi-Transparent Caption</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/443/jquery-image-gallerynews-slider-with-caption-tutorial" class="external text" title="http://www.queness.com/post/443/jquery-image-gallerynews-slider-with-caption-tutorial">jQuery Image Gallery/News Slider with Caption Tutorial  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/411/create-an-attractive-jquery-menu-with-fadein-and-fadeout-effect" class="external text" title="http://www.queness.com/post/411/create-an-attractive-jquery-menu-with-fadein-and-fadeout-effect">Create an Attractive jQuery Menu with Fadein and Fadeout Effect  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/356/create-a-vertical-horizontal-and-diagonal-sliding-content-website-with-jquery" class="external text" title="http://www.queness.com/post/356/create-a-vertical-horizontal-and-diagonal-sliding-content-website-with-jquery">Create a Vertical, Horizontal and Diagonal Sliding Content Website with jQuery  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/530/simple-lava-lamp-menu-tutorial-with-jquery" class="external text" title="http://www.queness.com/post/530/simple-lava-lamp-menu-tutorial-with-jquery">Simple Lava Lamp Menu Tutorial with jQuery  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/655/jquery-moving-tab-and-sliding-content-tutorial" class="external text" title="http://www.queness.com/post/655/jquery-moving-tab-and-sliding-content-tutorial">jQuery Moving Tab and Sliding Content Tutorial  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/620/create-a-stunning-sliding-door-effect-with-jquery" class="external text" title="http://www.queness.com/post/620/create-a-stunning-sliding-door-effect-with-jquery">Create a Stunning Sliding Door Effect with jQuery  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/590/jquery-thumbnail-with-zooming-image-and-fading-caption-tutorial" class="external text" title="http://www.queness.com/post/590/jquery-thumbnail-with-zooming-image-and-fading-caption-tutorial">jQuery Thumbnail with Zooming Image and Fading Caption Tutorial  </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness </a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/making-a-jquery-pagination-system/" class="external text" title="http://web.enavu.com/tutorials/making-a-jquery-pagination-system/">Making a jQuery pagination system</a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/making-a-jquery-infinite-carousel-with-nice-features/" class="external text" title="http://web.enavu.com/tutorials/making-a-jquery-infinite-carousel-with-nice-features/">Making a jQuery infinite carousel with nice features </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/how-to-make-a-completely-reusable-jquery-modal-window/" class="external text" title="http://web.enavu.com/tutorials/how-to-make-a-completely-reusable-jquery-modal-window/">How to make a completely reusable jquery modal window </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/make-a-custom-tab-interface-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/make-a-custom-tab-interface-with-jquery/">Make a custom tab interface with JQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/cool-navigation-menu-made-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/cool-navigation-menu-made-with-jquery/">Cool navigation menu made with JQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/sliding-door-effect-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/sliding-door-effect-with-jquery/">Sliding door effect with JQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/image-splitting-effect-with-css-and-jquery/" class="external text" title="http://web.enavu.com/tutorials/image-splitting-effect-with-css-and-jquery/">Image splitting effect with CSS and JQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/create-an-amazing-contact-form-with-no-ready-made-plugins/" class="external text" title="http://web.enavu.com/tutorials/create-an-amazing-contact-form-with-no-ready-made-plugins/">Create an amazing contact form with jQuery. </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/making-image-captions-using-jquery/" class="external text" title="http://web.enavu.com/tutorials/making-image-captions-using-jquery/">Making image captions using jQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/client-side-filtering-data-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/client-side-filtering-data-with-jquery/">Client side filtering data with jQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/844/create-a-thumbnail-with-fading-caption-using-jquery" class="external text" title="http://www.queness.com/post/844/create-a-thumbnail-with-fading-caption-using-jquery">Create a Thumbnail with Fading Caption Using jQuery </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/923/create-a-simple-infinite-carousel-with-jquery" class="external text" title="http://www.queness.com/post/923/create-a-simple-infinite-carousel-with-jquery">Create a Simple Infinite Carousel with jQuery </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/966/jquery-drop-down-menu-for-rss-subscription-tutorial" class="external text" title="http://www.queness.com/post/966/jquery-drop-down-menu-for-rss-subscription-tutorial">jQuery Drop Down Menu for RSS Subscription Tutorial </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/7-amazing-presentation-slides-to-teach-you-how-to-code-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/7-amazing-presentation-slides-to-teach-you-how-to-code-with-jquery/">7 Amazing Presentation Slides to Teach you How to Code with jQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://web.enavu.com/tutorials/making-a-cool-spotlight-effect-with-jquery/" class="external text" title="http://web.enavu.com/tutorials/making-a-cool-spotlight-effect-with-jquery/">Making a Cool Spotlight Effect with jQuery </a> by <a href="http://web.enavu.com/" class="external text" title="http://web.enavu.com">web.enavu</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/1450/jquery-photo-slide-show-with-slick-caption-tutorial-revisited" class="external text" title="http://www.queness.com/post/1450/jquery-photo-slide-show-with-slick-caption-tutorial-revisited">jQuery Photo Slide Show with Slick Caption Tutorial Revisited </a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=4" title="Edit section: Misc">edit</a>]</div><a name="Misc"></a><h3> Misc </h3>
+              <ul><li> <a href="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner" class="external text" title="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner">Beginner's Plugin Tutorial</a> Build jQuery Plugins from scratch (Beginner's tutorials).
+                </li></ul>
+              <ul><li> <a href="http://eligeske.com/jquery/jquery-run-script-if/" class="external text" title="http://eligeske.com/jquery/jquery-run-script-if/">Run my JQuery script only if a certain element exists!</a> by <a href="http://eligeske.com/" class="external text" title="http://eligeske.com">Eli Geske</a>
+                </li></ul>
+              <ul><li> <a href="http://http//webdevcodex.com/how-to-switch-to-an-alternate-stylesheet-using-jquery/" class="external text" title="http://http://webdevcodex.com/how-to-switch-to-an-alternate-stylesheet-using-jquery/">How to switch to an Alternate Stylesheet using jQuery</a> by <a href="http://www.webdevcodex.com/" class="external text" title="http://www.webdevcodex.com">Web Dev Codex</a>
+                </li></ul>
+              <ul><li> <a href="http://query7.com/jquery-menu-roundup/" class="external text" title="http://query7.com/jquery-menu-roundup/">Roundup of jQuery Menus</a> by <a href="http://query7.com/" class="external text" title="http://query7.com">Query7 Staff</a>
+                </li></ul>
+              <ul><li> <a href="http://marcgrabanski.com/article/5-tips-for-better-jquery-code" class="external text" title="http://marcgrabanski.com/article/5-tips-for-better-jquery-code">5 Tips for Better jQuery Code</a> by <a href="http://marcgrabanski.com/" class="external text" title="http://marcgrabanski.com">Marc Grabanski</a>
+                </li></ul>
+              <ul><li> <a href="http://yensdesign.com/2008/11/creating-ajax-websites-based-on-anchor-navigation/" class="external text" title="http://yensdesign.com/2008/11/creating-ajax-websites-based-on-anchor-navigation/">Creating AJAX websites based on anchor navigation using jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Ivan Guardado Castro &amp; Adrian Mato (yensdesign) </a>
+                </li></ul>
+              <ul><li> <a href="http://www.compoc.com/tuts/" class="external text" title="http://www.compoc.com/tuts/">Easy XML Consumption Using JQuery</a> by Joseph Ucuzoglu
+                </li></ul>
+              <ul><li> <a href="http://www.ispeakwebstuff.co.uk/2008/12/a-basic-image-gallery-the-jquery-way/" class="external text" title="http://www.ispeakwebstuff.co.uk/2008/12/a-basic-image-gallery-the-jquery-way/">Creating a very basic Image Gallery in JQuery</a> by <a href="http://www.jackfranklin.co.uk/" class="external text" title="http://www.jackfranklin.co.uk">Jack Franklin</a>
+                </li></ul>
+              <ul><li> <a href="http://www.coldfusionjedi.com/index.cfm/2009/2/17/jQuery-Thickbox-and-ColdFusion-Dynamic-Image-Resizing" class="external text" title="http://www.coldfusionjedi.com/index.cfm/2009/2/17/jQuery-Thickbox-and-ColdFusion-Dynamic-Image-Resizing">jQuery Thickbox and ColdFusion Dynamic Image Resizing</a> by <a href="http://www.coldfusionjedi.com/" class="external text" title="http://www.coldfusionjedi.com">Raymond Camden</a>
+                </li></ul>
+              <ul><li> <a href="http://www.coldfusionjedi.com/index.cfm/2009/2/9/An-introduction-to-jQuery-and-Form-Validation" class="external text" title="http://www.coldfusionjedi.com/index.cfm/2009/2/9/An-introduction-to-jQuery-and-Form-Validation">An introduction to jQuery and Form Validation</a> by <a href="http://www.coldfusionjedi.com/" class="external text" title="http://www.coldfusionjedi.com">Raymond Camden</a>
+                </li></ul>
+              <ul><li> <a href="http://www.queness.com/post/126/useful-and-handy-jquery-tips-and-tricks" class="external text" title="http://www.queness.com/post/126/useful-and-handy-jquery-tips-and-tricks">Useful and Handy jQuery Tips and Tricks</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <ul><li> <a href="http://www.ddrewdesign.com/home.php?cmd=article&amp;id=86" class="external text" title="http://www.ddrewdesign.com/home.php?cmd=article&amp;id=86">JQuery/PHP: Simple Random Text Generation Box</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=5" title="Edit section: Using jQuery with...">edit</a>]</div><a name="Using_jQuery_with..."></a><h3> Using jQuery with... </h3>
+              <ul><li> <a href="http://my123web.blogspot.com/2009/05/aspnet-user-controls-and-jquery.html" class="external text" title="http://my123web.blogspot.com/2009/05/aspnet-user-controls-and-jquery.html">ASP.NET UserControl and jQuery </a> by Hossein Rahmani
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Using_AjaxPro" title="Tutorials:Using AjaxPro">Using AjaxPro</a></b> by <a href="http://www.ajaxpro.info/" class="external text" title="http://www.ajaxpro.info/">Michael Schwarz</a><br>An example on how to use jQuery and Ajax.NET Professional together.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Using_Ext_With_jQuery" title="Tutorials:Using Ext With jQuery">Using Ext With jQuery</a></b> by Juha Suni<br>Getting started with the Ext library and jQuery.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Plugins" title="Category:Plugins">Plugins</a>, <a href="http://docs.jquery.com/action/edit/Category:Ext" class="new" title="Category:Ext">Ext</a></small>
+                </li><li> <a href="http://www.corefive.com/Lasso_and_jQuery/" class="external text" title="http://www.corefive.com/Lasso_and_jQuery/">Simple Web 2.0 with Lasso and jQuery</a>
+                </li><li> <a href="http://www.oneview.de/communities/public_community_links.jsf?communityID=jQuery-Snipplets&amp;page=1/" class="external text" title="http://www.oneview.de/communities/public_community_links.jsf?communityID=jQuery-Snipplets&amp;page=1/">jQuery snippets</a>
+                </li><li> <a href="http://www.lassosoft.com/Documentation/TotW/index.lasso?9302" class="external text" title="http://www.lassosoft.com/Documentation/TotW/index.lasso?9302">An introduction to using JQuery with Lasso</a>
+                </li><li> <a href="http://www.sitepoint.com/article/learn-adobe-air-part-1" class="external text" title="http://www.sitepoint.com/article/learn-adobe-air-part-1">Using jQuery with Adobe AIR</a>
+                </li><li> <a href="http://www.365labs.net/cf_jquery/jquery_coldfusion_quickstart.htm" class="external text" title="http://www.365labs.net/cf_jquery/jquery_coldfusion_quickstart.htm">Quickstart Guide to ColdFusion+jQuery</a> - Easy example on using jQuery with ColdFusion components (.cfc).]
+                </li><li> <a href="http://blog.cutterscrossing.com/index.cfm/2007/4/24/My-First-ExtJS-DataGrid-Pt-1" class="external text" title="http://blog.cutterscrossing.com/index.cfm/2007/4/24/My-First-ExtJS-DataGrid-Pt-1">My First ExtJS DataGrid</a> (<a href="http://blog.cutterscrossing.com/index.cfm/2007/4/25/My-First-ExtJS-DataGrid-Pt-2-Setting-Up" class="external text" title="http://blog.cutterscrossing.com/index.cfm/2007/4/25/My-First-ExtJS-DataGrid-Pt-2-Setting-Up">Part 2</a>, <a href="http://blog.cutterscrossing.com/index.cfm/2007/4/29/My-First-ExtJS-DataGrid-Pt-3-A-Paging-Query" class="external text" title="http://blog.cutterscrossing.com/index.cfm/2007/4/29/My-First-ExtJS-DataGrid-Pt-3-A-Paging-Query">Part 3</a>, <a href="http://blog.cutterscrossing.com/index.cfm/2007/5/4/My-First-ExtJS-DataGrid-Pt-4-The-Data-Store" class="external text" title="http://blog.cutterscrossing.com/index.cfm/2007/5/4/My-First-ExtJS-DataGrid-Pt-4-The-Data-Store">Part 4</a>, and <a href="http://blog.cutterscrossing.com/index.cfm/2007/5/8/My-First-ExtJS-DataGrid-Pt-5-The-ColumnModel" class="external text" title="http://blog.cutterscrossing.com/index.cfm/2007/5/8/My-First-ExtJS-DataGrid-Pt-5-The-ColumnModel">Part 5</a>)
+                </li><li> <a href="http://mad.ly/2007/05/17/jquery-ajax-rails/" class="external text" title="http://mad.ly/2007/05/17/jquery-ajax-rails/">JQuery Ajax + Rails</a>
+                </li><li> <a href="http://www.rubyrailways.com/add-a-powerful-ajax-table-to-your-rails-application-in-5-minutes/" class="external text" title="http://www.rubyrailways.com/add-a-powerful-ajax-table-to-your-rails-application-in-5-minutes/">jQuery + jqGrid + Rails = Powerful Grid Component in your Rails app!</a>
+                </li><li> <a href="http://marcgrabanski.com/article/cakephp-ajax-quick-save-jquery" class="external text" title="http://marcgrabanski.com/article/cakephp-ajax-quick-save-jquery">CakePHP Ajax "Quick Save" with jQuery</a> by <a href="http://marcgrabanski.com/" class="external text" title="http://marcgrabanski.com">Marc Grabanski</a>:<br>Using jQuery and CakePHP together to perform an Ajax form save.
+                </li><li> jQuery and Google Maps Tutorials by <a href="http://marcgrabanski.com/" class="external text" title="http://marcgrabanski.com">Marc Grabanski</a>:
+                  <ul><li> <a href="http://marcgrabanski.com/article/jquery-google-maps-tutorial-basics" class="external text" title="http://marcgrabanski.com/article/jquery-google-maps-tutorial-basics">jQuery &amp; Google Maps #1 Basics</a> - Getting started using jQuery inside the Google Maps API.
+                    </li><li> <a href="http://marcgrabanski.com/article/jquery-google-maps-tutorial-ajax-php-mysql" class="external text" title="http://marcgrabanski.com/article/jquery-google-maps-tutorial-ajax-php-mysql">jQuery &amp; Google Maps #2 Ajax</a> - Saving and Retrieving Points with Ajax.
+                    </li></ul>
+                </li><li> <a href="http://www.factsandpeople.com/facts-mainmenu-5/18-php/83-using-jquery-in-joomla-articles" class="external text" title="http://www.factsandpeople.com/facts-mainmenu-5/18-php/83-using-jquery-in-joomla-articles">Using jQuery with Joomla 1.5 and PHP 5</a>
+                </li><li> <a href="http://www.netbeans.org/kb/docs/web/jquery-structured-document.html" class="external text" title="http://www.netbeans.org/kb/docs/web/jquery-structured-document.html">Using jQuery to Enhance the Appearance and Usability of a Structured Document</a> with the NetBeans IDE by <a href="http://www.netbeans.org/" class="external text" title="http://www.netbeans.org/">Lloyd Dunn</a>
+                </li><li> Drupal 6.x Creating a lavaLamp menu * <a href="http://geeksandgod.com/tutorials" class="external text" title="http://geeksandgod.com/tutorials">GeeksandGod.com - Tutorials</a>
+                </li><li> <a href="http://weblogs.asp.net/jan/archive/2008/11/20/sharepoint-2007-and-jquery-1.aspx" class="external text" title="http://weblogs.asp.net/jan/archive/2008/11/20/sharepoint-2007-and-jquery-1.aspx">Integrating SharePoint 2007 and jQuery</a> (<a href="http://weblogs.asp.net/jan/archive/2008/11/20/sharepoint-2007-and-jquery-2.aspx" class="external text" title="http://weblogs.asp.net/jan/archive/2008/11/20/sharepoint-2007-and-jquery-2.aspx">Part 2</a>, <a href="http://codeplex.com/smarttools" class="external text" title="http://codeplex.com/smarttools">SmartTools.jQuery on CodePlex</a>) by <a href="http://weblogs.asp.net/jan/" class="external text" title="http://weblogs.asp.net/jan/">Jan Tielens</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=6" title="Edit section: Sources for tutorials">edit</a>]</div><a name="Sources_for_tutorials"></a><h3> Sources for tutorials </h3>
+              <p>These are sites that are dedicated to regularly providing a number of jQuery tutorials.
+              </p>
+              <ul><li> <a href="http://www.authenticsociety.com/blog/WhatisjQuery_Part1" class="external text" title="http://www.authenticsociety.com/blog/WhatisjQuery_Part1">jQuery Tutorials</a> Tutorials for Beginners
+                </li><li> <a href="http://www.tutorialspoint.com/jquery" class="external text" title="http://www.tutorialspoint.com/jquery">TutorialsPoint - jQuery Tutorials</a>
+                </li><li> <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Learning jQuery</a> maintained by jQuery Project Team member Karl Swedberg
+                </li><li> <a href="http://jqueryfordesigners.com/" class="external text" title="http://jqueryfordesigners.com/">jQuery for Designers</a> (incl. screencasts) maintained by jQuery Project Team member Remy Sharp
+                </li><li> <a href="http://valums.com/" class="external text" title="http://valums.com">valums.com - jQuery &amp; Web Tutorials</a>
+                </li><li> <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">15 Days of jQuery</a>
+                </li><li> <a href="http://www.detacheddesigns.com/blog/blogMiscellaneous.aspx?BlogCategory=jQuery" class="external text" title="http://www.detacheddesigns.com/blog/blogMiscellaneous.aspx?BlogCategory=jQuery">Detached Designs - jQuery Blog</a>
+                </li><li> <a href="http://jquery.cherryaustin.com/" class="external text" title="http://jquery.cherryaustin.com/">absolute beginner's blog</a>
+                </li><li> <a href="http://jquery-howto.blogspot.com/" class="external text" title="http://jquery-howto.blogspot.com">jQuery HowTo, Tutorials &amp; Plugins</a>
+                </li><li> <a href="http://mdrisser.r1designs.net/blog/" class="external text" title="http://mdrisser.r1designs.net/blog/">jQuery UI Tutorials</a>
+                </li><li> <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">yensdesign.com - jQuery &amp; web tutorials</a>
+                </li><li> <a href="http://www.query7.com/" class="external text" title="http://www.query7.com">Query7.com - jQuery Tutorials &amp; Plugin Reviews</a>
+                </li><li> <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness - jQuery tutorials</a>
+                </li><li> <a href="http://www.tutsvalley.com/" class="external text" title="http://www.tutsvalley.com">TutsValley - jQuery Tutorials</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=7" title="Edit section: jQuery API Tutorials">edit</a>]</div><a name="jQuery_API_Tutorials"></a><h3> jQuery API Tutorials </h3>
+              <p>These tutorials directly look at different concepts presented in the <a href="http://docs.jquery.com/API" title="API">jQuery API</a> and discuss them in-depth.
+              </p>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=8" title="Edit section: jQuery Core">edit</a>]</div><a name="jQuery_Core"></a><h4> jQuery Core </h4>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Introducing_%24%28document%29.ready%28%29" title="Tutorials:Introducing $(document).ready()">Introducing $(document).ready()</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg</a><br>An introduction to the $(document).ready() function and explaining how important it is.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Multiple_%24%28document%29.ready%28%29" title="Tutorials:Multiple $(document).ready()">Multiple $(document).ready()</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg</a><br>Some advanced tips for working with $(document).ready().<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a></small>
+                </li><li> <a href="http://15daysofjquery.com/quicker/4/" class="external text" title="http://15daysofjquery.com/quicker/4/">Quicker Than window.onload()</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=9" title="Edit section: Traversing and Selectors">edit</a>]</div><a name="Traversing_and_Selectors"></a><h4> Traversing and Selectors </h4>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:How_to_Get_Anything_You_Want" title="Tutorials:How to Get Anything You Want">How to Get Anything You Want</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg</a><br>An introduction to jQuery selectors and traversal methods, and their use in navigating the DOM<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Zebra_Striping_Made_Easy" title="Tutorials:Zebra Striping Made Easy">Zebra Striping Made Easy</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Walking through the simple code needed to stripe table rows.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Auto-Selecting_Navigation" title="Tutorials:Auto-Selecting Navigation">Auto-Selecting Navigation</a></b> by <a href="http://leftlogic.com/" class="external text" title="http://leftlogic.com/">Remy Sharp</a><br>Highlighting the current page in a navigation menu.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:5_Quick_jQuery_Tips" title="Tutorials:5 Quick jQuery Tips">5 Quick jQuery Tips</a></b> by <a href="http://pixelcarnage.net/" class="external text" title="http://pixelcarnage.net/">Rowan Lewis</a><br>Some quick, short, examples of what you can do with jQuery.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a></small>
+                </li><li> <a href="http://15daysofjquery.com/style-sheet-switcheroo/12/" class="external text" title="http://15daysofjquery.com/style-sheet-switcheroo/12/">Stylesheet Switcheroo</a>
+                </li><li> <a href="http://marcgrabanski.com/article/jquery-select-list-values" class="external text" title="http://marcgrabanski.com/article/jquery-select-list-values">Getting Select List Values </a> by <a href="http://marcgrabanski.com/" class="external text" title="http://marcgrabanski.com">Marc Grabanski </a><br>Using jQuery selectors to get the current value or option from a select list.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=10" title="Edit section: Manipulation, Attributes, and CSS">edit</a>]</div><a name="Manipulation.2C_Attributes.2C_and_CSS"></a><h4> Manipulation, Attributes, and CSS </h4>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Wrapping_Images_With_A_Drop_Shadow" title="Tutorials:Wrapping Images With A Drop Shadow">Wrapping Images With A Drop Shadow</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>A simple example of using .wrap() to add a drop shadow to an image.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Rounded_Corners" title="Tutorials:Rounded Corners">Rounded Corners</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Adding rounded corners to an element, using no extra markup.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Multiple_File_Upload_Magic" title="Tutorials:Multiple File Upload Magic">Multiple File Upload Magic</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Building an unobtrusive multiple file upload input.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Forms" title="Category:Forms">Forms</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Getting_Around_The_Minimum_Height_Glitch" title="Tutorials:Getting Around The Minimum Height Glitch">Getting Around The Minimum Height Glitch</a></b> by <a href="http://docs.jquery.com/User:Yansky" class="external text" title="http://docs.jquery.com/User:Yansky">Yansky</a><br>Just a quick tutorial for getting around the min-height glitch<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:PNG_Opacity_Fix_for_IE6" title="Tutorials:PNG Opacity Fix for IE6">PNG Opacity Fix for IE6</a></b> by Timo Besenreuther<br>How to make transparent PNGs possible in Internet Explorer 6<br><small></small>
+                </li><li> <a href="http://www.learningjquery.com/2006/09/fancy-drop-cap-part-1" class="external text" title="http://www.learningjquery.com/2006/09/fancy-drop-cap-part-1">Fancy Drop Cap</a> (<a href="http://www.learningjquery.com/2006/10/fancy-drop-cap-part-2" class="external text" title="http://www.learningjquery.com/2006/10/fancy-drop-cap-part-2">Part 2</a>)
+                </li><li> <a href="http://www.learningjquery.com/2006/12/multiple-fancy-drop-caps" class="external text" title="http://www.learningjquery.com/2006/12/multiple-fancy-drop-caps">Multiple Fancy Drop Caps</a>
+                </li><li> <a href="http://coderseye.com/2007/semitransparent-rollovers-made-easy-with-jquery.html" class="external text" title="http://coderseye.com/2007/semitransparent-rollovers-made-easy-with-jquery.html">Semi-transparent Rollovers</a>
+                </li><li> <a href="http://www.henriksen.no/UsingJQueryToModifyPresentationWhilePreservingDocumentSemantics.aspx" class="external text" title="http://www.henriksen.no/UsingJQueryToModifyPresentationWhilePreservingDocumentSemantics.aspx">Fancy quote marks while preserving presentation</a>
+                </li><li> <a href="http://homework.nwsnet.de/news/ea21_turn-nested-lists-into-a-collapsible-tree-with-jquery" class="external text" title="http://homework.nwsnet.de/news/ea21_turn-nested-lists-into-a-collapsible-tree-with-jquery">Turn Nested Lists Into a Collapsible Tree With jQuery</a>
+                </li><li> <a href="http://blog.jeremymartin.name/2008/02/easy-multi-select-transfer-with-jquery.html" class="external text" title="http://blog.jeremymartin.name/2008/02/easy-multi-select-transfer-with-jquery.html">Easy Multi Select Transfer with jQuery</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=11" title="Edit section: Events">edit</a>]</div><a name="Events"></a><h4> Events </h4>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Mouse_Position" title="Tutorials:Mouse Position">Mouse Position</a></b> by <a href="http://www.blogamundo.com/" class="external text" title="http://www.blogamundo.com/">Patrick Hall</a><br>Some quick examples of finding the position of the mouse on a page.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Accordion_Menu_%28Screencast%29" title="Tutorials:Accordion Menu (Screencast)">Accordion Menu (Screencast)</a></b> by <a href="http://ejohn.org/" class="external text" title="http://ejohn.org/">John Resig</a><br>Building a simple, unobtrusive, Accordion-style menu using basic events and animations.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a>, <a href="http://docs.jquery.com/Category:Screencasts" title="Category:Screencasts">Screencasts</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:AJAX_and_Events" title="Tutorials:AJAX and Events">AJAX and Events</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg and Jonathan Chaffer</a><br>Discusses binding event handlers to DOM elements at the appropriate times.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Really_Simple_Live_Comment_Preview" title="Tutorials:Really Simple Live Comment Preview">Really Simple Live Comment Preview</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg</a><br>Adding a live preview to the comment entry area of Wordpress.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Attributes" title="Category:Attributes">Attributes</a>, <a href="http://docs.jquery.com/Category:Forms" title="Category:Forms">Forms</a></small>
+                </li><li> <a href="http://yensdesign.com/2008/12/creating-an-os-web-interface-in-jquery-part-i/" class="external text" title="http://yensdesign.com/2008/12/creating-an-os-web-interface-in-jquery-part-i/">Creating an OS Web Interface in jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li><li> <a href="http://yensdesign.com/2008/09/how-to-create-a-stunning-and-smooth-popup-using-jquery/" class="external text" title="http://yensdesign.com/2008/09/how-to-create-a-stunning-and-smooth-popup-using-jquery/">Smooth and Stunning Popup from scratch</a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li><li> <a href="http://yensdesign.com/2008/12/create-an-amazing-music-player-using-mouse-gestures-hotkeys-in-jquery/" class="external text" title="http://yensdesign.com/2008/12/create-an-amazing-music-player-using-mouse-gestures-hotkeys-in-jquery/">Create an amazing music player using mouse gestures &amp; hotkeys in jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato &amp; Ivan Guardado Castro (yensdesign.com) </a>
+                </li><li> <a href="http://www.shopdev.co.uk/blog/cookies-with-jquery-designing-collapsible-layouts/" class="external text" title="http://www.shopdev.co.uk/blog/cookies-with-jquery-designing-collapsible-layouts/">Collapsible Layouts</a> - Use jQuery to create smart collapsible page layouts.
+                </li><li> <a href="http://www.learningjquery.com/2008/03/working-with-events-part-1" class="external text" title="http://www.learningjquery.com/2008/03/working-with-events-part-1">Working with Events - Event Delegation</a>
+                </li><li> <a href="http://www.learningjquery.com/2008/05/working-with-events-part-2" class="external text" title="http://www.learningjquery.com/2008/05/working-with-events-part-2">Working with Events - Event Re-binding</a>
+                </li><li> <a href="http://www.digitaloverload.co.uk/blog/2007/12/05/rollovers-with-jquery/" class="external text" title="http://www.digitaloverload.co.uk/blog/2007/12/05/rollovers-with-jquery/">Easy Image Rollovers with CSS class</a>
+                </li><li> <a href="http://www.shopdev.co.uk/blog/animated-menus-using-jquery/" class="external text" title="http://www.shopdev.co.uk/blog/animated-menus-using-jquery/">Animated Menus</a>
+                </li><li> <a href="http://www.learningjquery.com/2006/10/quick-tip-blur-links" class="external text" title="http://www.learningjquery.com/2006/10/quick-tip-blur-links">Blurring Links</a>
+                </li><li> <a href="http://15daysofjquery.com/affiliate-link-loveliness/7/" class="external text" title="http://15daysofjquery.com/affiliate-link-loveliness/7/">Affiliate Link Loveliness</a>
+                </li><li> <a href="http://webexpose.org/2006/12/28/jquery-pop-up-menu-tutorial/" class="external text" title="http://webexpose.org/2006/12/28/jquery-pop-up-menu-tutorial/">Pop Up Menu</a>
+                </li><li> <a href="http://www.learningjquery.com/2007/02/quick-tip-set-hover-class-for-anything" class="external text" title="http://www.learningjquery.com/2007/02/quick-tip-set-hover-class-for-anything">Set a Hover Class for Anything</a>
+                </li><li> <a href="http://bradlis7.com/main/jquery-chars-remaining" class="external text" title="http://bradlis7.com/main/jquery-chars-remaining">Characters Remaining on an Input Field</a>
+                </li><li> <a href="http://remysharp.com/2007/01/25/jquery-tutorial-text-box-hints/" class="external text" title="http://remysharp.com/2007/01/25/jquery-tutorial-text-box-hints/">Text Box Hints</a>
+                </li><li> <a href="http://dotnetfish.blogspot.com/2007/11/technorati-like-scroller.html" class="external text" title="http://dotnetfish.blogspot.com/2007/11/technorati-like-scroller.html">News scroller/ticker with jQuery and AJAX - multiple news, fading effect, mouseover pause</a>
+                </li><li> <a href="http://www.shopdev.co.uk/blog/text-resizing-with-jquery/" class="external text" title="http://www.shopdev.co.uk/blog/text-resizing-with-jquery/">jQuery Text Resizing</a> by <a href="http://www.shopdev.co.uk/" class="external text" title="http://www.shopdev.co.uk">ShopDev</a>
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/a-simple-tab-script-with-jquery/" class="external text" title="http://codersstuff.com/a-simple-tab-script-with-jquery/">A simple tab script with jquery</a> by <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com">Codersstuff.com</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=12" title="Edit section: Ajax">edit</a>]</div><a name="Ajax"></a><h4> Ajax </h4>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Quick_and_Dirty_Ajax" title="Tutorials:Quick and Dirty Ajax">Quick and Dirty Ajax</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>A screencast that provides a quick run through of all the different types of Ajax that're possible with jQuery.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Screencasts" title="Category:Screencasts">Screencasts</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Safer_Contact_Forms_Without_CAPTCHAs" title="Tutorials:Safer Contact Forms Without CAPTCHAs">Safer Contact Forms Without CAPTCHAs</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Building a complete, jQuery-based, solution for stopping spammers from mis-using your forms.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Forms" title="Category:Forms">Forms</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:Edit_in_Place_with_Ajax" title="Tutorials:Edit in Place with Ajax">Edit in Place with Ajax</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Building an edit-in-place solution that saves all data in the background, using Ajax.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Forms" title="Category:Forms">Forms</a></small>
+                </li></ul>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:AJAX_and_Events" title="Tutorials:AJAX and Events">AJAX and Events</a></b> by <a href="http://www.learningjquery.com/" class="external text" title="http://www.learningjquery.com/">Karl Swedberg and Jonathan Chaffer</a><br>Discusses binding event handlers to DOM elements at the appropriate times.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Ajax" title="Category:Ajax">Ajax</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a></small>
+                </li><li> <a href="http://yensdesign.com/2008/12/how-to-load-content-via-ajax-in-jquery/" class="external text" title="http://yensdesign.com/2008/12/how-to-load-content-via-ajax-in-jquery/">How to load content via AJAX in jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li><li> <a href="http://yensdesign.com/2009/01/create-a-shoutbox-using-php-and-ajax-jquery/" class="external text" title="http://yensdesign.com/2009/01/create-a-shoutbox-using-php-and-ajax-jquery/">Create a shoutbox using PHP and AJAX (with jQuery) </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li><li> <a href="http://yensdesign.com/2008/11/creating-ajax-websites-based-on-anchor-navigation/" class="external text" title="http://yensdesign.com/2008/11/creating-ajax-websites-based-on-anchor-navigation/">Creating AJAX websites based on anchor navigation using jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Ivan Guardado Castro &amp; Adrian Mato (yensdesign) </a>
+                </li><li> <a href="http://www.sitepoint.com/article/ajax-jquery" class="external text" title="http://www.sitepoint.com/article/ajax-jquery">Easy Ajax With jQuery</a> by <a href="http://www.sitepoint.com/articlelist/478" class="external text" title="http://www.sitepoint.com/articlelist/478">Akash Mehta</a>
+                </li><li> <a href="http://www-128.ibm.com/developerworks/library/x-ajaxjquery.html" class="external text" title="http://www-128.ibm.com/developerworks/library/x-ajaxjquery.html">Simplify Ajax development with jQuery</a> by <a href="http://www.thefutureoftheweb.com/" class="external text" title="http://www.thefutureoftheweb.com/">Jesse Skinner</a>
+                </li><li> <a href="http://www.factsandpeople.com/facts-mainmenu-5/26-html-and-javascript/89-jquery-ajax-json-and-php" class="external text" title="http://www.factsandpeople.com/facts-mainmenu-5/26-html-and-javascript/89-jquery-ajax-json-and-php">Ajax development with jQuery using PHP and JSON objects</a> by <a href="http://www.factsandpeople.com/" class="external text" title="http://www.factsandpeople.com">FactsAndPeople.com</a>
+                </li><li> <a href="http://www.zenperfect.com/2007/08/08/no-more-ajax-headaches/" class="external text" title="http://www.zenperfect.com/2007/08/08/no-more-ajax-headaches/">No More Ajax Headaches</a> - How to debug Ajax calls with FireBug
+                </li><li> <a href="http://remysharp.com/2007/01/20/auto-populating-select-boxes-using-jquery-ajax/" class="external text" title="http://remysharp.com/2007/01/20/auto-populating-select-boxes-using-jquery-ajax/">Auto-populating Select Boxes using jQuery &amp; Ajax</a> - Also makes use of PHP and JSON.
+                </li><li> <a href="http://webexpose.org/2007/01/31/b2b-ajax-in-jquery-with-special-effects/" class="external text" title="http://webexpose.org/2007/01/31/b2b-ajax-in-jquery-with-special-effects/">Ajax with Special Effects</a>
+                </li><li> <a href="http://remysharp.com/2007/03/05/jquery-ajaxed-forms/" class="external text" title="http://remysharp.com/2007/03/05/jquery-ajaxed-forms/">Ajax'ed Forms</a>
+                </li><li> <a href="http://www.sitepoint.com/article/ajax-jquery" class="external text" title="http://www.sitepoint.com/article/ajax-jquery">Easy AJAX with jQuery</a>
+                </li><li> <a href="http://fromvega.com/wordpress/2007/05/05/auto-complete-field-with-jquery-json-php/" class="external text" title="http://fromvega.com/wordpress/2007/05/05/auto-complete-field-with-jquery-json-php/">Auto-Complete Field with jQuery, JSON &amp; PHP</a> (<a href="http://fromvega.com/wordpress/2007/05/08/auto-complete-field-with-jquery-code-explained/" class="external text" title="http://fromvega.com/wordpress/2007/05/08/auto-complete-field-with-jquery-code-explained/">Part 2</a>)
+                </li><li> <a href="http://www.dreamdealer.nl/?action=viewTutorial&amp;id=67" class="external text" title="http://www.dreamdealer.nl/?action=viewTutorial&amp;id=67">AJAX callbacks with jQuery</a>
+                </li><li> <a href="http://www.xml.com/pub/a/2007/10/10/jquery-and-xml.html" class="external text" title="http://www.xml.com/pub/a/2007/10/10/jquery-and-xml.html">jQuery and XML</a>
+                </li><li> <a href="http://marcgrabanski.com/article/83/jQuery-Makes-Parsing-XML-Easy" class="external text" title="http://marcgrabanski.com/article/83/jQuery-Makes-Parsing-XML-Easy">jQuery Makes Parsing XML Easy</a> by <a href="http://marcgrabanski.com/" class="external text" title="http://marcgrabanski.com">Marc Grabanski</a><br>Quick code example to illustrate how jQuery can make parsing XML simpler.
+                </li><li> <a href="http://www.chazzuka.com/blog/?p=174" class="external text" title="http://www.chazzuka.com/blog/?p=174">create ajax based login form using jquery PHP</a> by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design</a> updated <a href="http://www.chazzuka.com/blog/?p=212" class="external text" title="http://www.chazzuka.com/blog/?p=212">here</a>
+                </li><li> <a href="http://www.chazzuka.com/blog/?p=206" class="external text" title="http://www.chazzuka.com/blog/?p=206">auto populate dropdownlist via ajax request with Jquery</a> by <a href="http://www.chazzuka.com/" class="external text" title="http://www.chazzuka.com">Bali Web Design</a>
+                </li><li> <a href="http://homework.nwsnet.de/news/9132_put-and-delete-with-jquery" class="external text" title="http://homework.nwsnet.de/news/9132_put-and-delete-with-jquery">PUT and DELETE with jQuery</a>
+                </li><li> <a href="http://www.factsandpeople.com/facts-mainmenu-5/26-html-and-javascript/89-jquery-ajax-json-and-php" class="external text" title="http://www.factsandpeople.com/facts-mainmenu-5/26-html-and-javascript/89-jquery-ajax-json-and-php">Ajax with jQuery, PHP and JSON objects</a> by <a href="http://www.factsandpeople.com/" class="external text" title="http://www.factsandpeople.com">FactsAndPeople.com</a>
+                </li><li> <a href="http://www.queness.com/post/160/create-a-ajax-based-form-submission-with-jquery" class="external text" title="http://www.queness.com/post/160/create-a-ajax-based-form-submission-with-jquery">Create a Ajax based Form Submission with jQuery+PHP</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li><li> <a href="http://www.queness.com/post/328/a-simple-ajax-driven-website-with-jqueryphp" class="external text" title="http://www.queness.com/post/328/a-simple-ajax-driven-website-with-jqueryphp">A Simple AJAX Driven Website with jQuery+PHP</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li><li> <a href="http://tutsvalley.com/tutorials/checking-username-availability-with-ajax-using-jquery/" class="external text" title="http://tutsvalley.com/tutorials/checking-username-availability-with-ajax-using-jquery/">Checking username availability with ajax using jQuery </a> by <a href="http://www.tutsvalley.com/" class="external text" title="http://www.tutsvalley.com">TutsValley</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=13" title="Edit section: Plugin Development">edit</a>]</div><a name="Plugin_Development"></a><h3> Plugin Development </h3>
+              <ul><li><a href="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner" class="external text" title="http://www.authenticsociety.com/blog/jQueryPluginTutorial_Beginner">jQuery Plugin Tutorial</a> Learn to make jQuery plugins by following these plugin patterns
+                </li><li><a href="http://www.learningjquery.com/2007/10/a-plugin-development-pattern" class="external text" title="http://www.learningjquery.com/2007/10/a-plugin-development-pattern">A Plugin Development Pattern</a> by Mike Alsup
+                </li><li> <a href="http://yensdesign.com/2008/12/how-to-create-a-plugin-for-jquery/" class="external text" title="http://yensdesign.com/2008/12/how-to-create-a-plugin-for-jquery/">How to create a plugin for jQuery </a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato (yensdesign.com) </a>
+                </li><li><a href="http://www.ok-cool.com/posts/read/19-jquery-for-programmers-part-1" class="external text" title="http://www.ok-cool.com/posts/read/19-jquery-for-programmers-part-1">jQuery for Programmers</a> – Writing a simple, dynamic, plugin using jQuery.
+                </li><li> <a href="http://webcloud.se/article/Building_jQuery_plugins" class="external text" title="http://webcloud.se/article/Building_jQuery_plugins">Building jQuery Plugins</a>
+                </li><li><a href="http://www.onenaught.com/posts/85/turn-your-jquery-code-into-a-richer-unit-testable-plugin" class="external text" title="http://www.onenaught.com/posts/85/turn-your-jquery-code-into-a-richer-unit-testable-plugin">Turn your jQuery code into a richer, unit testable, plugin</a>
+                </li><li> <a href="http://www.queness.com/post/112/a-really-simple-jquery-plugin-tutorial" class="external text" title="http://www.queness.com/post/112/a-really-simple-jquery-plugin-tutorial">A Really Simple jQuery Plugin Tutorial</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li><li><a href="http://valums.com/jquery-plugins/" class="external text" title="http://valums.com/jquery-plugins/">Introduction to building jQuery plugins</a> by <a href="http://valums.com/" class="external text" title="http://valums.com">Andrew Valums</a>
+                </li><li><a href="http://wintoni.us/post/123029056/jquery-plugin-patterns" class="external text" title="http://wintoni.us/post/123029056/jquery-plugin-patterns">jQuery Plugin Patterns</a> by <a href="http://wintoni.us/" class="external text" title="http://wintoni.us">Winton Welsh</a>
+                </li><li> <a href="http://blog.jeremymartin.name/2008/02/building-your-first-jquery-plugin-that.html" class="external text" title="http://blog.jeremymartin.name/2008/02/building-your-first-jquery-plugin-that.html">Building Your First jQuery Plugin</a>
+                </li><li> <a href="http://webcloud.se/article/Building_jQuery_plugins/" class="external text" title="http://webcloud.se/article/Building_jQuery_plugins/">Building jQuery Plugins</a> by <a href="http://www.webcloud.se/" class="external text" title="http://www.webcloud.se">Daniel </a>
+                </li><li> <a href="http://yensdesign.com/2009/01/how-to-display-tips-creating-jquery-plugin/" class="external text" title="http://yensdesign.com/2009/01/how-to-display-tips-creating-jquery-plugin/">How to display tips by creating a jQuery plugin</a> by <a href="http://www.yensdesign.com/" class="external text" title="http://www.yensdesign.com">Adrian Mato &amp; Ivan Guardado Castro (yensdesign.com)</a>
+                </li><li> <a href="http://www.queness.com/post/112/a-really-simple-jquery-plugin-tutorial" class="external text" title="http://www.queness.com/post/112/a-really-simple-jquery-plugin-tutorial">A Really Simple jQuery Plugin Tutorial</a> by <a href="http://www.queness.com/" class="external text" title="http://www.queness.com">Queness</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=14" title="Edit section: Tools">edit</a>]</div><a name="Tools"></a><h3> Tools </h3>
+              <p>These guides look at using jQuery with different tools and utilities.
+              </p>
+              <ul><li> <a href="http://ejohn.org/blog/hacking-digg-with-firebug-and-jquery/" class="external text" title="http://ejohn.org/blog/hacking-digg-with-firebug-and-jquery/">Using Firebug and jQuery (Screencast)</a>
+                </li><li> <a href="http://www.learningjquery.com/2007/02/have-your-jquery-fun-on-any-site-with-greasemonkey" class="external text" title="http://www.learningjquery.com/2007/02/have-your-jquery-fun-on-any-site-with-greasemonkey">Have Your jQuery Fun on Any Site with Greasemonkey</a>
+                </li><li> <a href="http://www.aptana.com/docs/index.php/Getting_started_with_Aptana_and_jQuery" class="external text" title="http://www.aptana.com/docs/index.php/Getting_started_with_Aptana_and_jQuery">Getting started with Aptana and jQuery</a>
+                </li><li> <a href="http://www.learningjquery.com/2008/06/updated-jquery-bookmarklet" class="external text" title="http://www.learningjquery.com/2008/06/updated-jquery-bookmarklet">Updated jQuerify Bookmarklet</a>
+                </li><li> <a href="http://weblogs.asp.net/wenching/archive/2008/09/24/aptana-1-1-intellisense-weirdness-for-jquery.aspx" class="external text" title="http://weblogs.asp.net/wenching/archive/2008/09/24/aptana-1-1-intellisense-weirdness-for-jquery.aspx">Solving JQuery IntelliSense Weirdness in Aptana 1.1</a>
+                </li><li> <a href="http://www.spket.com/jquery.html" class="external text" title="http://www.spket.com/jquery.html">Using jQuery with Spket IDE</a>
+                </li><li> <a href="http://www.vim.org/scripts/script.php?script_id=2416" class="external text" title="http://www.vim.org/scripts/script.php?script_id=2416">Using syntax coloration in Vim</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=15" title="Edit section: Web Services">edit</a>]</div><a name="Web_Services"></a><h3> Web Services </h3>
+              <ul><li> <a href="http://www.seo-expert-blog.com/blog/parsing-yahoo-pipes-json-feeds-with-jquery" class="external text" title="http://www.seo-expert-blog.com/blog/parsing-yahoo-pipes-json-feeds-with-jquery">Parsing Yahoo Pipes JSON Feeds with jQuery</a> - A tutorial on how to parse and display JSON feeds from the Yahoo Pipes Web Service using jQuery.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=16" title="Edit section: Tutoriaux en Français">edit</a>]</div><a name="Tutoriaux_en_Fran.C3.A7ais"></a><h2> Tutoriaux en Français </h2>
+              <p><b><a href="http://jquery.info/" class="external text" title="http://jquery.info/">jQuery.info</a></b>
+              </p>
+              <ul><li> <b><a href="http://www.jquery.info/spip.php?article21" class="external text" title="http://www.jquery.info/spip.php?article21">Danse avec jQuery</a></b>
+                </li><li> <a href="http://www.jquery.info/spip.php?article1" class="external text" title="http://www.jquery.info/spip.php?article1">Transformer tous les liens d’une page</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article2" class="external text" title="http://www.jquery.info/spip.php?article2">Ajouter une boîte à coucou</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article3" class="external text" title="http://www.jquery.info/spip.php?article3">Un paragraphe trop à l’étroit</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article6" class="external text" title="http://www.jquery.info/spip.php?article6">Le plugin «&nbsp;editable&nbsp;»</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article7" class="external text" title="http://www.jquery.info/spip.php?article7">Géolocaliser Lille</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article8" class="external text" title="http://www.jquery.info/spip.php?article8">Le plugin «&nbsp;form&nbsp;»</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article10" class="external text" title="http://www.jquery.info/spip.php?article10">Un repas équilibré</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article11" class="external text" title="http://www.jquery.info/spip.php?article11">Ajouter une image dans une page</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article12" class="external text" title="http://www.jquery.info/spip.php?article12">Cloner des éléments</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article13" class="external text" title="http://www.jquery.info/spip.php?article13">Le code révélé</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article16" class="external text" title="http://www.jquery.info/spip.php?article16">Jouer à Shanghaï</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article18" class="external text" title="http://www.jquery.info/spip.php?article18">Une boîte de recherche un peu smart</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article19" class="external text" title="http://www.jquery.info/spip.php?article19">L’effet machine à écrire</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article26" class="external text" title="http://www.jquery.info/spip.php?article26">end()</a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article27" class="external text" title="http://www.jquery.info/spip.php?article27">Bandeau d’actualité</a>
+                </li></ul>
+              <p><b><a href="http://www.babylon-design.com/" class="external text" title="http://www.babylon-design.com/">Babylon-Design</a></b>
+              </p>
+              <ul><li> <a href="http://www.babylon-design.com/site/index.php/2008/01/21/211-apprendre-et-comprendre-jquery-1-3" class="external text" title="http://www.babylon-design.com/site/index.php/2008/01/21/211-apprendre-et-comprendre-jquery-1-3">Apprendre et comprendre jQuery - 1/3</a>
+                </li><li> <a href="http://www.babylon-design.com/site/index.php/2008/02/13/216-apprendre-et-comprendre-jquery-2-3" class="external text" title="http://www.babylon-design.com/site/index.php/2008/02/13/216-apprendre-et-comprendre-jquery-2-3">Apprendre et comprendre jQuery - 2/3</a>
+                </li><li> <a href="http://www.babylon-design.com/site/index.php/2008/04/14/226-apprendre-et-comprendre-jquery-3-3" class="external text" title="http://www.babylon-design.com/site/index.php/2008/04/14/226-apprendre-et-comprendre-jquery-3-3">Apprendre et comprendre jQuery - 3/3</a>
+                </li></ul>
+              <p><b><a href="http://www.lesintegristes.net/" class="external text" title="http://www.lesintegristes.net/">Les Intégristes</a></b>
+              </p>
+              <ul><li> <a href="http://www.lesintegristes.net/2007/06/11/inauguration-et-introduction-a-jquery/" class="external text" title="http://www.lesintegristes.net/2007/06/11/inauguration-et-introduction-a-jquery/">Introduction à jQuery</a>
+                </li><li> <a href="http://www.lesintegristes.net/2007/08/16/jquery-dansez-maintenant/" class="external text" title="http://www.lesintegristes.net/2007/08/16/jquery-dansez-maintenant/">jQuery&nbsp;: dansez maintenant&nbsp;! (quelques méthodes)</a>
+                </li><li> <a href="http://www.lesintegristes.net/2008/01/14/jquery-codez-branche/" class="external text" title="http://www.lesintegristes.net/2008/01/14/jquery-codez-branche/">jQuery&nbsp;: codez branché&nbsp;! (les plugins)</a>
+                </li><li> <a href="http://www.lesintegristes.net/2008/09/16/jquery-l-evenement/" class="external text" title="http://www.lesintegristes.net/2008/09/16/jquery-l-evenement/">jQuery&nbsp;: l'événement&nbsp;! (les événements)</a>
+                </li></ul>
+              <p><b><a href="http://www.webinventif.fr/" class="external text" title="http://www.webinventif.fr/">WebInventif.fr</a></b>
+              </p>
+              <ul><li> <a href="http://www.webinventif.fr/comment-utiliser-jquery-dans-un-bookmarklet/" class="external text" title="http://www.webinventif.fr/comment-utiliser-jquery-dans-un-bookmarklet/">Comment utiliser jQuery dans un bookmarklet&nbsp;?</a>
+                </li><li> <a href="http://www.webinventif.fr/accessibilite-laissez-le-visiteur-choisir-comment-il-va-ouvrir-un-lien/" class="external text" title="http://www.webinventif.fr/accessibilite-laissez-le-visiteur-choisir-comment-il-va-ouvrir-un-lien/">Laissez le visiteur choisir comment il va ouvrir un lien</a>
+                </li></ul>
+              <p><b><a href="http://www.lepotlatch.org/" class="external text" title="http://www.lepotlatch.org/">LePotlatch.org</a></b>
+              </p>
+              <ul><li> <a href="http://www.lepotlatch.org/index.php/2008/07/15/135-creez-une-faq-accessible-et-facile-a-mettre-a-jour-avec-jquery" class="external text" title="http://www.lepotlatch.org/index.php/2008/07/15/135-creez-une-faq-accessible-et-facile-a-mettre-a-jour-avec-jquery">Une FAQ accessible et facile à mettre à jour avec JQuery</a>
+                </li></ul>
+              <p><b><a href="http://www.chezneg.fr/leblog/chezneg-leblog.php" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php">ChezNeg - Le blog d'un développeur web</a></b>
+              </p>
+              <ul><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=102" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=102">Premiers pas avec jQuery et sa fonction slideToggle()</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=113" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=113">Système de commentaires en Ajax avec jQuery</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=126" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=126">Vérification instantanée des champs d'un formulaire avec jQuery</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=170" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=170">Coder un slider horizontal avec jQuery</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=182" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=182">executer des événements sur des éléments rajoutés au DOM</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=185" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=185">Faire une animation en boucle avec jQuery et setInterval()</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=214" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=214">Créer un bloc déroulant avec Jquery</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=220" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=220">Recherche à la volée avec Jquery</a>
+                </li><li> <a href="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=224" class="external text" title="http://www.chezneg.fr/leblog/chezneg-leblog.php?id_art=224">Faire un bouton "J'aime" comme sur Facebook avec jQuery</a>
+                </li></ul>
+              <p><b><a href="http://blogs.codes-sources.com/loicbar/default.aspx" class="external text" title="http://blogs.codes-sources.com/loicbar/default.aspx">Le blog technique de Loïc Bar</a></b>
+              </p>
+              <ul><li> <a href="http://blogs.codes-sources.com/loicbar/archive/2008/08/07/jquery-vs-asp-net-ajax.aspx" class="external text" title="http://blogs.codes-sources.com/loicbar/archive/2008/08/07/jquery-vs-asp-net-ajax.aspx">jQuery et ASP.NET</a>
+                </li></ul>
+              <p><b><a href="http://snoupix.com/" class="external text" title="http://snoupix.com/">Snoupix.com</a></b>
+              </p>
+              <ul><li> <a href="http://www.snoupix.com/slideshow-jquery-accessible_tutorial_28.html" class="external text" title="http://www.snoupix.com/slideshow-jquery-accessible_tutorial_28.html">Slideshow jQuery accessible</a>
+                </li><li> <a href="http://snoupix.com/galerie-snoupix-flip_tutorial_8.html" class="external text" title="http://snoupix.com/galerie-snoupix-flip_tutorial_8.html">Galerie d'images avec le plugin Flip!</a>
+                </li><li> <a href="http://www.snoupix.com/verifier-ses-formulaires-avec-jquery_tutorial_13.html" class="external text" title="http://www.snoupix.com/verifier-ses-formulaires-avec-jquery_tutorial_13.html">Vérifier un formulaire avec jQuery</a>
+                </li><li> <a href="http://www.snoupix.com/galerie-dimages-dynamique_tutorial_15.html" class="external text" title="http://www.snoupix.com/galerie-dimages-dynamique_tutorial_15.html">Galerie d'images dynamique en jQuery</a>
+                </li><li> <a href="http://www.snoupix.com/initiation-a-ajax-avec-jquery-partie-1_tutorial_20.html" class="external text" title="http://www.snoupix.com/initiation-a-ajax-avec-jquery-partie-1_tutorial_20.html">Initiation à AJAX avec jQuery (Partie 1)</a>
+                </li><li> <a href="http://www.snoupix.com/initiation-a-ajax-avec-jquery-partie-2_tutorial_21.html" class="external text" title="http://www.snoupix.com/initiation-a-ajax-avec-jquery-partie-2_tutorial_21.html">Initiation à AJAX avec jQuery (Partie 2)</a>
+                </li></ul>
+              <p><b><a href="http://www.webjax.eu/" class="external text" title="http://www.webjax.eu/">Webjax.eu</a></b>
+              </p>
+              <ul><li> <a href="http://www.webjax.eu/r/14-JQuery-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/r/14-JQuery-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">Liste des pages Webjax.eu sur JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/220-JQuery-presentation-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/p/220-JQuery-presentation-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">Présentation du framework JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/221-JQuery-methodes-core-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/p/221-JQuery-methodes-core-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">Méthode JQuery.Core</a>
+                </li><li> <a href="http://www.webjax.eu/p/222-JQuery-selecteurs-selectors-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enh" class="external text" title="http://www.webjax.eu/p/222-JQuery-selecteurs-selectors-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enh">Sélecteurs JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/223-JQuery-attributs-attributes-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enha" class="external text" title="http://www.webjax.eu/p/223-JQuery-attributs-attributes-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enha">Attributs JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/224-JQuery-traversing-dom-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/p/224-JQuery-traversing-dom-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">Traverser le modèle DOM avec JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/225-JQuery-manipulation-dom-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/p/225-JQuery-manipulation-dom-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">Manipuler le modèle DOM avec JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/226-JQuery-css-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer" class="external text" title="http://www.webjax.eu/p/226-JQuery-css-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhancer">CSS avec JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/227-JQuery-evenements-events-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhan" class="external text" title="http://www.webjax.eu/p/227-JQuery-evenements-events-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enhan">Gestion des évènements JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/228-JQuery-effects-visual-effets-visuels-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-con" class="external text" title="http://www.webjax.eu/p/228-JQuery-effects-visual-effets-visuels-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-con">Effets JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/229-JQuery-ajax-requests-AJAX-requetes-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-cont" class="external text" title="http://www.webjax.eu/p/229-JQuery-ajax-requests-AJAX-requetes-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-cont">Requêtes AJAX avec JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/230-JQuery-utilities-utilitaires-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enh" class="external text" title="http://www.webjax.eu/p/230-JQuery-utilities-utilitaires-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria-dom-control-enh">Utilitaires JQuery</a>
+                </li><li> <a href="http://www.webjax.eu/p/231-JQuery-interface-utilisateur-user-interface-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria" class="external text" title="http://www.webjax.eu/p/231-JQuery-interface-utilisateur-user-interface-javascript-framework-ajax-library-jquery-j-query-Framework-Javascript-Library-Ajax-asyncronous-web2.0-ria">Interface Utilisateur JQuery UI</a>
+                </li></ul>
+              <p><br>
+                <b><a href="http://jquery.developpeur-web2.com/" class="external text" title="http://jquery.developpeur-web2.com">portail sur jQuery</a></b>
+              </p>
+              <ul><li> <a href="http://jquery.developpeur-web2.com/documentation.php" class="external text" title="http://jquery.developpeur-web2.com/documentation.php">documentation en français de l'API</a>
+                </li></ul>
+              <p><br>
+                <b><a href="http://www.noshade.net/" class="external text" title="http://www.noshade.net/">NoShade.net</a></b>
+              </p>
+              <ul><li> <a href="http://www.noshade.net/tutoriel-css-115-creer-un-mini-site-avec-jquery.php" class="external text" title="http://www.noshade.net/tutoriel-css-115-creer-un-mini-site-avec-jquery.php">Créer un mini-site avec jQuery</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=17" title="Edit section: Tutoriales en español">edit</a>]</div><a name="Tutoriales_en_espa.C3.B1ol"></a><h2> Tutoriales en español  </h2>
+              <ul><li> <a href="http://web.ontuts.com/tutoriales/como-crear-un-menu-de-pestanas-elegante-en-jquery/" class="external text" title="http://web.ontuts.com/tutoriales/como-crear-un-menu-de-pestanas-elegante-en-jquery/">Cómo crear un menú de pestañas elegante en jQuery</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://web.ontuts.com/tutoriales/como-validar-un-formulario-con-php-y-javascript-jquery/" class="external text" title="http://web.ontuts.com/tutoriales/como-validar-un-formulario-con-php-y-javascript-jquery/">Cómo validar un formulario utilizando PHP y Javascript (jQuery)</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://web.ontuts.com/tutoriales/como-crear-un-menu-contextual-en-javascript-mediante-jquery/" class="external text" title="http://web.ontuts.com/tutoriales/como-crear-un-menu-contextual-en-javascript-mediante-jquery/">Cómo crear un Menú Contextual en Javascript mediante jQuery</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://web.ontuts.com/tutoriales/como-crear-un-plugin-para-jquery/" class="external text" title="http://web.ontuts.com/tutoriales/como-crear-un-plugin-para-jquery/">Cómo crear un Plugin para jQuery</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://web.ontuts.com/tutoriales/mejorando-las-cajas-de-busqueda-mediante-jquery/" class="external text" title="http://web.ontuts.com/tutoriales/mejorando-las-cajas-de-busqueda-mediante-jquery/">Mejorando las cajas de búsqueda mediante jQuery</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://web.ontuts.com/tutoriales/jsonp-llamadas-ajax-entre-dominios/" class="external text" title="http://web.ontuts.com/tutoriales/jsonp-llamadas-ajax-entre-dominios/">JSONP, llamadas entre dominios (incluye plugin para jQuery)</a> publicado por <a href="http://web.ontuts.com/" class="external text" title="http://web.ontuts.com">Web.Ontuts</a>
+                </li><li> <a href="http://www.maestrosdelweb.com/editorial/javascript-facil-y-rapido-con-jquery/" class="external text" title="http://www.maestrosdelweb.com/editorial/javascript-facil-y-rapido-con-jquery/">JavaScript fácil y rápido con jQuery</a>
+                </li><li> <a href="http://blog.scriptia.net/articulos/2006/12/eventos-en-jquery.html" class="external text" title="http://blog.scriptia.net/articulos/2006/12/eventos-en-jquery.html">Eventos en jQuery</a>
+                </li><li> <a href="http://www.javascriptya.com.ar/jquery/" class="external text" title="http://www.javascriptya.com.ar/jquery/">Conceptos esenciales de la librería JQuery</a>
+                  Además incluye una variedad de ejercicios en el sitio los cuales
+                  puedes: probarlos, modificarlos y ver los resultados inmediatamente.
+                </li><li> <a href="http://dizque.lacalabaza.net/sotanos/2006/05/introduccion-a-jquery/" class="external text" title="http://dizque.lacalabaza.net/sotanos/2006/05/introduccion-a-jquery/">Introducción a jQuery</a>
+                </li></ul>
+              <ul><li> <b><a href="http://15daysofjquery.com/table-striping-made-easy/5/" class="external text" title="http://15daysofjquery.com/table-striping-made-easy/5/">Haciendo Tablas Cebra Facilmente</a></b> by <a href="http://15daysofjquery.com/" class="external text" title="http://15daysofjquery.com/">Jack Born</a><br>Esta
+                  es una traducció del artí "Zebra Striping Made Easy" de Jack Born.
+                  Pequeño tutorial a través de ejemplos sencillos de código para hacer
+                  tablas tipo cebra.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a></small>
+                </li><li> <a href="http://illasaron.com/upload/videos?ct=34/" class="external text" title="http://illasaron.com/upload/videos?ct=34/">VideoTutorial Nº1 Curso de JQuery</a>
+                  En este primer VideoTutorial hacemos una introducción en la que vemos
+                  cuales son las ventajas del uso de este tipo de frameworks, así como las
+                  funcionalidades que nos ofrece. Terminamos creando el primero proyecto
+                  con jQuery y explicando la sintaxis y estructura básica que utiliza. De
+                  momento publicados 14 videotuoriales del Curso.
+                </li><li> <a href="http://www.desarrolloweb.com/manuales/manual-jquery.html" class="external text" title="http://www.desarrolloweb.com/manuales/manual-jquery.html">Manual de jQuery</a> publicado por <a href="http://www.desarrolloweb.com/" class="external text" title="http://www.desarrolloweb.com">DesarolloWeb.com</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=18" title="Edit section: Tutorials auf Deutsch">edit</a>]</div><a name="Tutorials_auf_Deutsch"></a><h2> Tutorials auf Deutsch </h2>
+              <ul><li> <a href="http://www.very-clever.com/jquery-tutorial.php" class="external text" title="http://www.very-clever.com/jquery-tutorial.php">jQuery - Die Grundlagen</a>
+                </li><li> <a href="http://olaf-bosch.de/ajax-mit-jquery-in-thickbox-ein-tutorial/" class="external text" title="http://olaf-bosch.de/ajax-mit-jquery-in-thickbox-ein-tutorial/">jQuery - AJAX-Formular</a>
+                  AJAX-Formular in einer Thickbox - Ich werde im folgendem beschreiben
+                  wie ich vorgegangen bin mit wenigen Eingriffen in den HTML-Code ein
+                  PopUp mit dem Formular zu erstellen in welchem die Übermittlung per AJAX
+                  geschieht.
+                </li><li> <a href="http://olaf-bosch.de/tutorial-webseite-mit-jquery-animieren-teil-1/" class="external text" title="http://olaf-bosch.de/tutorial-webseite-mit-jquery-animieren-teil-1/">jQuery - Tutorial-Serie</a>
+                  Es geht darum eine existierende Webseite ohne Eingriff in CSS und
+                  HTML-Code zu dynamisieren. Ohne Javascript im Browser des Besuchers
+                  bleibt alles wie es ist, alle Inhalte sind voll zugänglich. Wer aber
+                  Javascript akiviert hat bekommt eine durch Animation und Ajax
+                  aufgewertete Funktion.
+                </li><li> <a href="http://tomk32.de/2007/02/03/jquery-lange-beitrage-in-kurzform/" class="external text" title="http://tomk32.de/2007/02/03/jquery-lange-beitrage-in-kurzform/">Lange Textbeiträge nur teilweise anzeigen</a> mit Möglichkeiten diese ganz darzustellen.
+                </li><li> <a href="http://awasteofwords.com/article/jquery-und-google-maps-so-gehts" class="external text" title="http://awasteofwords.com/article/jquery-und-google-maps-so-gehts">jQuery und Google Maps</a> - Google Maps mit jQuery-Hilfe einbinden.
+                </li><li> <a href="http://tomk32.de/2007/04/04/javascript-debug-helfer-mit-jquery/" class="external text" title="http://tomk32.de/2007/04/04/javascript-debug-helfer-mit-jquery/">Javascript debug Helfer mit JQuery</a> – die ganz schnelle Tour.
+                </li><li> <a href="http://www.vogel-nest.de/wiki/Main/ImageSnap" class="external text" title="http://www.vogel-nest.de/wiki/Main/ImageSnap">Ajax-Tooltip-Image</a> - Ein Bild eingebunden als Link per MouseOver anzeigen.
+                </li><li> <a href="http://www.jensbond.de/jquery-tutorial-1-basics/" class="external text" title="http://www.jensbond.de/jquery-tutorial-1-basics/">JQuery Beispiele</a> - Grundlagen für Ajax und zugriffe auf Objekte anhand von Beispielen
+                </li><li> <a href="http://www.webmaster-resource.de/" class="external text" title="http://www.webmaster-resource.de/">JQuery und Wordpress</a> - Tutorial für die Einbindung von jQuery in Wordpress Themes
+                </li><li> <a href="http://blog.d4nza.de/tutorials/jquery-tutorial-1/99.html" class="external text" title="http://blog.d4nza.de/tutorials/jquery-tutorial-1/99.html">JQuery Einstiegs Tutorial</a> - jQuery Tutorial mit Beispielen
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=19" title="Edit section: O jQuery po polsku">edit</a>]</div><a name="O_jQuery_po_polsku"></a><h2> O jQuery po polsku </h2>
+              <ul><li> <a href="http://ferrante.pl/category/tech/jquery/" class="external text" title="http://ferrante.pl/category/tech/jquery/">jQuery - to łatwe!</a> - jeden z pierwszych w Polsce, przystępnie napisany kurs jQuery dla początkujących
+                </li></ul>
+              <ul><li> <a href="http://aylard.viawww.pl/2009/01/06/jquery-ajax-narzedzia/" class="external text" title="http://aylard.viawww.pl/2009/01/06/jquery-ajax-narzedzia/">jQuery - Narzędzia.</a> - pierwsza część cyklu opisującego narzędzia jQuery.
+                </li></ul>
+              <ul><li> <a href="http://aylard.viawww.pl/2009/01/06/jquery-ajax-narzedzia/" class="external text" title="http://aylard.viawww.pl/2009/01/06/jquery-ajax-narzedzia/">jQuery - Narzędzia.</a> - pierwsza część cyklu opisującego narzędzia jQuery.
+                </li></ul>
+              <ul><li> <a href="http://aylard.viawww.pl/2009/01/25/jquery-narzedzia-v2/" class="external text" title="http://aylard.viawww.pl/2009/01/25/jquery-narzedzia-v2/">jQuery - Narzędzia v2.</a> - druga część cyklu opisującego narzędzia jQuery.
+                </li></ul>
+              <ul><li> <a href="http://aylard.viawww.pl/2009/01/09/jquery-kurs-wskazniki/" class="external text" title="http://aylard.viawww.pl/2009/01/09/jquery-kurs-wskazniki/">jQuery - Kurs - Wskaźniki.</a> - pierwsza część spolszczonej dokumentacji.
+                </li></ul>
+              <ul><li> <a href="http://infdevblog.wordpress.com/2009/01/14/jquery-postjson/" class="external text" title="http://infdevblog.wordpress.com/2009/01/14/jquery-postjson/">jQuery - JSON przez POST</a> - bardzo prosty dodatek do jQuery - postJSON.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=20" title="Edit section: Türkçe eğitseller">edit</a>]</div><a name="T.C3.BCrk.C3.A7e_e.C4.9Fitseller"></a><h2> Türkçe eğitseller </h2>
+              <ul><li> <a href="http://jquery-tr.com/" class="external text" title="http://jquery-tr.com/">jQuery-TR</a> jQuery için Türkçe destek grubu
+                </li><li> <a href="http://www.eburhan.com/jquery-ve-seciciler/" class="external text" title="http://www.eburhan.com/jquery-ve-seciciler/">jQuery ve Seçiciler</a> Seçiciler nedir ve jQuery için ne anlam ifade ederler?
+                </li><li> <a href="http://www.eburhan.com/jquery-ve-css-islemleri/" class="external text" title="http://www.eburhan.com/jquery-ve-css-islemleri/">jQuery ve Css işlemleri</a> jQuery ile Css işlemleri nasıl yapılıyor?
+                </li></ul>
+              <ul><li> <a href="http://www.eburhan.com/jquery-ve-olaylar/" class="external text" title="http://www.eburhan.com/jquery-ve-olaylar/">jQuery ve Olaylar</a> jQuery ile olay yönetimi nasıl yapılıyor?
+                </li></ul>
+              <ul><li> <a href="http://www.eburhan.com/jquery-ve-dom-islemleri/" class="external text" title="http://www.eburhan.com/jquery-ve-dom-islemleri/">jQuery ve DOM işlemleri</a> jQuery ile DOM (<i>document object model</i>) işlemleri nasıl yapılır?
+                </li></ul>
+              <ul><li> <a href="http://www.eburhan.com/jquery-ve-ajax-islemleri/" class="external text" title="http://www.eburhan.com/jquery-ve-ajax-islemleri/">jQuery ve AJAX işlemleri</a> jQuery ile AJAX işlemleri nasıl yapılır?
+                </li></ul>
+              <ul><li> <a href="http://www.eburhan.com/jquery-ve-efekt-islemleri/" class="external text" title="http://www.eburhan.com/jquery-ve-efekt-islemleri/">jQuery ve Efekt işlemleri</a> jQuery ile efekt işlemleri nasıl yapılır?
+                </li></ul>
+              <ul><li> <a href="http://www.hitman.gen.tr/jquery/jquery-ile-animasyon-yapmak.html" class="external text" title="http://www.hitman.gen.tr/jquery/jquery-ile-animasyon-yapmak.html">jQuery ile animasyon yapmak</a> jQuery ile animasyon işlemleri nasıl yapılıyor? Temel ve ileri düzey bilgi. Yazar: Jeffrey Jordan Way, Çeviri: <a href="http://www.nsohbet.com/" class="external text" title="http://www.nsohbet.com/">sohbet</a> - <a href="http://www.alastyr.com/" class="external text" title="http://www.alastyr.com/">Alastyr</a> - By <a href="http://www.hitman.gen.tr/" class="external text" title="http://www.hitman.gen.tr/">Mehmet Tahta</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=55" class="external text" title="http://www.zskblog.com/detay.aspx?id=55">Jquery ve css ile hareketli button yapmak </a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=15" class="external text" title="http://www.zskblog.com/detay.aspx?id=15">Jquery ve Seçiciler (Jquery Selectors) </a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=41" class="external text" title="http://www.zskblog.com/detay.aspx?id=41">PHP ve Jquery ile Google suggest benzeri AutoComplete | Otomatik Metin Tamamlama Hazırlamak </a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=36" class="external text" title="http://www.zskblog.com/detay.aspx?id=36">ASP.NET ortamında Jquery, Ajax ve JSON ile sayfada yüklenen resimlere resim yükleniyor efekti vermek</a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=18" class="external text" title="http://www.zskblog.com/detay.aspx?id=18">Jquery, Ajax ve PHP ile dizin içeriğini okumak ve göstermek</a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://www.zskblog.com/detay.aspx?id=38" class="external text" title="http://www.zskblog.com/detay.aspx?id=38">Jquery ve PHP ile Ajax stili çoklu dosya göndermek </a>  by <a href="http://www.zskblog.com/" class="external text" title="http://www.zskblog.com/">Zülküf Küçüközer</a>
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquerysayfa-yenilenmeden-ajax-ile-veri-eklemek/" class="external text" title="http://codersstuff.com/jquerysayfa-yenilenmeden-ajax-ile-veri-eklemek/">jQuery:Sayfa yenilenmeden AJAX ile veri eklemek</a> Form ile gönderilen veri sayfa yenilenmeden nasıl alınır&nbsp;? - <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a>
+                </li></ul>
+              <ul><li> <a href="http://transrocha.com/" class="external text" title="http://transrocha.com/">Transportadora</a> Site taşıma yeni sitede jquery ayar düğmesini kullanarak
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquery-ile-sayfayi-yenilemeden-verileri-ekrana-bastirmak/" class="external text" title="http://codersstuff.com/jquery-ile-sayfayi-yenilemeden-verileri-ekrana-bastirmak/">jQuery ile sayfayı yenilemeden verileri ekrana bastırmak</a> jQuery ve Javascript ile sayfaya refresh atmadan 3 satır kodla verileri ekrana bastırabilirsiniz.- <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a>
+                </li></ul>
+              <ul><li> <a href="http://fofoca.info/" class="external text" title="http://fofoca.info/">Fofoca</a> Dedikodu sitesinde jquery ayar düğmesini kullanarak
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquery-ile-mouse-pozisyonu/" class="external text" title="http://codersstuff.com/jquery-ile-mouse-pozisyonu/">jQuery ile mouse pozisyonu</a> jQuery ile imlecin kordinatlarını almak. - <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a>
+                </li></ul>
+              <ul><li> <a href="http://blog.weboutbox.com/?p=69" class="external text" title="http://blog.weboutbox.com/?p=69">jQuery ile validation</a> jQuery ile validation.
+                </li></ul>
+              <ul><li> <a href="http://www.kodaman.org/yazi/jquery-asp-net-rating-oylama" class="external text" title="http://www.kodaman.org/yazi/jquery-asp-net-rating-oylama">jQuery ile Yıldızlı Oylama (Star Rating) </a> | <a href="http://www.logmania.com/jk/aspnet_rating.aspx" class="external text" title="http://www.logmania.com/jk/aspnet_rating.aspx">demo </a> jQuery ve Asp.net ile Yıldızlı Oylama (star rating).
+                </li></ul>
+              <ul><li> <a href="http://www.kodaman.org/yazi/jquery-e-ile-efektli-acilan" class="external text" title="http://www.kodaman.org/yazi/jquery-e-ile-efektli-acilan">jQuery Akordion </a> | <a href="http://www.logmania.com/jk/jquery-slide-content.asp" class="external text" title="http://www.logmania.com/jk/jquery-slide-content.asp">demo </a>  jQuery ile Akordion içerik yapımı.
+                </li></ul>
+              <ul><li> <a href="http://www.oi-torpedo.com/" class="external text" title="http://www.oi-torpedo.com/">Oi Torpedo</a> jQuery tarafından ücretsiz kısa mesaj
+                </li></ul>
+              <ul><li> <a href="http://blog.weboutbox.com/?p=43" class="external text" title="http://blog.weboutbox.com/?p=43">jQuery ile Animasyon</a> jQuery ile animasyon.
+                </li></ul>
+              <ul><li> <a href="http://blog.weboutbox.com/?p=39" class="external text" title="http://blog.weboutbox.com/?p=39">Jquery ile Accordion menu hazırlayalım</a> Jquery ile Accordion menu hazırlayalım.
+                </li></ul>
+              <ul><li> <a href="http://blog.weboutbox.com/?p=79" class="external text" title="http://blog.weboutbox.com/?p=79">Jquery'de each kullanımı.</a> Jquery de each kullanımı.
+                </li></ul>
+              <ul><li> <a href="http://www.bighaber.com/jquery/" class="external text" title="http://www.bighaber.com/jquery/">Jquery ile Arkadaşına gönder formu</a>
+                </li></ul>
+              <ul><li> <a href="http://www.onur.org/jquery-form-dogrulama-eklentisi.html" class="external text" title="http://www.onur.org/jquery-form-dogrulama-eklentisi.html">jQuery ile Form Doğrulama</a> - <a href="http://www.salgit.com/" class="external text" title="http://www.salgit.com/">Resimler</a>
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquery-toplink-plugin/" class="external text" title="http://codersstuff.com/jquery-toplink-plugin/">jQuery topLink Plugin</a> - <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a>
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquery-ile-fotograf-adres-kontorolu/" class="external text" title="http://codersstuff.com/jquery-ile-fotograf-adres-kontorolu/">jQuery ile fotoğraf adres kontorolü</a> - <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a>
+                </li></ul>
+              <ul><li> <a href="http://codersstuff.com/jquery-ile-efekt-vererek-veri-silmek/" class="external text" title="http://codersstuff.com/jquery-ile-efekt-vererek-veri-silmek/">jQuery ile efekt vererek veri silmek</a> - <a href="http://codersstuff.com/" class="external text" title="http://codersstuff.com/">Codersstuff.com</a> ~ <a href="http://codersstuff.blogspot.com/" class="external text" title="http://codersstuff.blogspot.com/">Codersstuff Blog</a>
+                </li></ul>
+              <ul><li> <a href="http://teknodergi.org/jquery-ile-sayfay%C4%B1-otomatik-kayd%C4%B1rmak/" class="external text" title="http://teknodergi.org/jquery-ile-sayfayı-otomatik-kaydırmak/">jQuery ile sayfa kaydırma</a> - <a href="http://teknodergi.org/" class="external text" title="http://teknodergi.org/">Teknodergi.Org</a>
+                </li></ul>
+              <ul><li> <a href="http://teknodergi.org/jquery-ile-form-kontrol%C3%BC/" class="external text" title="http://teknodergi.org/jquery-ile-form-kontrolü/">jQuery Form Kontrolü</a> - <a href="http://teknodergi.org/" class="external text" title="http://teknodergi.org/">Teknodergi.Org</a>
+                </li></ul>
+              <ul><li> <a href="http://teknodergi.org/drupal-i%C3%A7erisine-jquery-plugin-lerini-eklemek/" class="external text" title="http://teknodergi.org/drupal-içerisine-jquery-plugin-lerini-eklemek/">Drupal ile JQuery Kullanımı</a> - <a href="http://teknodergi.org/" class="external text" title="http://teknodergi.org/">Teknodergi.Org</a>
+                </li></ul>
+              <ul><li> <a href="http://www.2nci.com/lab/detail/jquery-iframe-auto-height" class="external text" title="http://www.2nci.com/lab/detail/jquery-iframe-auto-height">Jquery, Iframe Auto Height</a> Jquery ile iframe Auto Height tanımlama
+                </li></ul>
+              <ul><li> <a href="http://www.2nci.com/lab/detail/jquery-textbox-help-plugin" class="external text" title="http://www.2nci.com/lab/detail/jquery-textbox-help-plugin">Jquery TextBox Help Plugin</a> Jquery ile TextBox için tıklandığında kaybolan yardım metni oluşturma
+                </li></ul>
+              <ul><li> <a href="http://www.2nci.com/lab/detail/jquery-nice-css-form" class="external text" title="http://www.2nci.com/lab/detail/jquery-nice-css-form">Jquery &amp; Nice Css Form</a> Jquery ile temiz css tabanlı formlar oluşturmak
+                </li></ul>
+              <ul><li> <a href="http://www.2nci.com/lab/detail/jquery-form-tooltip" class="external text" title="http://www.2nci.com/lab/detail/jquery-form-tooltip">Jquery Form Tooltip</a> Jquery ile form alanları için tooltipler oluşturma (Form Tooltip)
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=21" title="Edit section: 简体中文辅导">edit</a>]</div><a name=".E7.AE.80.E4.BD.93.E4.B8.AD.E6.96.87.E8.BE.85.E5.AF.BC"></a><h2> 简体中文辅导 </h2>
+              <ul><li> <a href="http://shawphy.com/jqueryapi/" class="external text" title="http://shawphy.com/jqueryapi/">jQuery 1.3 中文参考文档</a>
+                </li></ul>
+              <ul><li> <a href="http://jquery.org.cn/" class="external text" title="http://jquery.org.cn/">jQuery 中文社区</a>
+                </li><li> <a href="http://bbs.jquery.org.cn/" class="external text" title="http://bbs.jquery.org.cn/">jQuery 中文社区论坛</a>
+                </li><li> <a href="http://www.cnjquery.com/" class="external text" title="http://www.cnjquery.com/">jquery爱好者</a>
+                </li></ul>
+              <ul><li> <a href="http://realazy.org/blog/2006/08/31/small-jquery-tutorial/" class="external text" title="http://realazy.org/blog/2006/08/31/small-jquery-tutorial/">小试牛刀——一篇jQuery小教程</a>
+                </li><li> <a href="http://www.k99k.com/jQuery_getting_started.html" class="external text" title="http://www.k99k.com/jQuery_getting_started.html">jQuery中文入门指南</a>
+                </li><li> <a href="http://learning.artech.cn/20080621.mastering-javascript-jquery.html" class="external text" title="http://learning.artech.cn/20080621.mastering-javascript-jquery.html">《精通JavaScript+jQuery》视频教程(共16讲)</a>
+                </li><li> <a href="http://www.blueidea.com/tech/web/2007/5056.asp" class="external text" title="http://www.blueidea.com/tech/web/2007/5056.asp">jQuery技巧总结</a>
+                </li><li> <a href="http://yytcpt.blueidea.com/archives/2007/4056.shtml" class="external text" title="http://yytcpt.blueidea.com/archives/2007/4056.shtml">jQuery 学习心得</a>
+                </li></ul>
+              <ul><li> <a href="http://gonefish.cn/?page_id=375" class="external text" title="http://gonefish.cn/?page_id=375">使用Zend Framework和jQuery实现有Ajax效果的区域选择</a>
+                </li><li> <a href="http://www.keephelp.com/javascript/jquery/" class="external text" title="http://www.keephelp.com/javascript/jquery/">jQuery 滑动菜单Demo实例</a>
+                </li><li> <a href="http://blog.csdn.net/jiji262/archive/2007/08/12/1739715.aspx" class="external text" title="http://blog.csdn.net/jiji262/archive/2007/08/12/1739715.aspx">使用jQuery简化Ajax开发</a>
+                </li><li> [<a href="http://blog.csdn.net/jiji262/archive/2007/07/28/1713771.aspx" class="external free" title="http://blog.csdn.net/jiji262/archive/2007/07/28/1713771.aspx">http://blog.csdn.net/jiji262/archive/2007/07/28/1713771.aspx</a> jQuery
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=22" title="Edit section: 繁體中文教學">edit</a>]</div><a name=".E7.B9.81.E9.AB.94.E4.B8.AD.E6.96.87.E6.95.99.E5.AD.B8"></a><h2> 繁體中文教學 </h2>
+              <ul><li> <a href="http://jsgears.com/thread-63-1-1.html" class="external text" title="http://jsgears.com/thread-63-1-1.html">jQuery 教學 - 基礎篇</a>
+                </li><li> <a href="http://blog.ericsk.org/archives/tag/jquery-tut" class="external text" title="http://blog.ericsk.org/archives/tag/jquery-tut">jQuery 學習心得筆記</a>
+                </li><li> <a href="http://www.ezjquery.com/" class="external text" title="http://www.ezjquery.com">jQuery中文書 - 網頁設計.愛上jQuery</a>
+                </li><li> <a href="http://webdesign.piipo.com/jquery/" class="external text" title="http://webdesign.piipo.com/jquery/">jQuery教學</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=23" title="Edit section: 日本語チュートリアル">edit</a>]</div><a name=".E6.97.A5.E6.9C.AC.E8.AA.9E.E3.83.81.E3.83.A5.E3.83.BC.E3.83.88.E3.83.AA.E3.82.A2.E3.83.AB"></a><h2> 日本語チュートリアル </h2>
+              <ul><li> <a href="http://semooh.jp/jquery/ref/" class="external text" title="http://semooh.jp/jquery/ref/">jQuery逆引きサンプル集</a>
+                </li><li> <a href="http://www.mikage.to/jquery/" class="external text" title="http://www.mikage.to/jquery/">jQuery 開発者向けメモ</a>
+                </li><li> <a href="http://allabout.co.jp/internet/javascript/closeup/CU20071020A/" class="external text" title="http://allabout.co.jp/internet/javascript/closeup/CU20071020A/">jQueryの魔法</a>
+                </li><li> <a href="http://allabout.co.jp/internet/javascript/closeup/CU20071125A/index2.htm" class="external text" title="http://allabout.co.jp/internet/javascript/closeup/CU20071125A/index2.htm">他のコードとの衝突を避けるテクニック(about .noConflict() and namespace)</a>
+                </li><li> <a href="http://digitechlog.com/2009/01/15/how-to-parse-xml-in-jquery-with-sample-source-code.html" class="external text" title="http://digitechlog.com/2009/01/15/how-to-parse-xml-in-jquery-with-sample-source-code.html">jQueryを使ってXMLを解析操作する</a> by <a href="http://www.digitechlog.com/" class="external text" title="http://www.digitechlog.com/">digitechlog</a>
+                </li><li> <a href="http://digitechlog.com/2009/05/02/how-to-display-csv-data-to-table-with-jquery-and-csv2table.html" class="external text" title="http://digitechlog.com/2009/05/02/how-to-display-csv-data-to-table-with-jquery-and-csv2table.html">jQuery+csv2tableでCSVデータをテーブルにしよう</a> by <a href="http://ntt.cc/" class="external text" title="http://ntt.cc/">Minidxer</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=24" title="Edit section: 한국어 제이쿼리 튜토리얼">edit</a>]</div><a name=".ED.95.9C.EA.B5.AD.EC.96.B4_.EC.A0.9C.EC.9D.B4.EC.BF.BC.EB.A6.AC_.ED.8A.9C.ED.86.A0.EB.A6.AC.EC.96.BC"></a><h2> 한국어 제이쿼리 튜토리얼 </h2>
+              <ul><li> <a href="http://countryman.springnote.com/pages/1957700" class="external text" title="http://countryman.springnote.com/pages/1957700">jQuery 스프링노트(springnote-wiki)</a>
+                </li><li> <a href="http://www2.infoplace.co.kr/bbs/list.php?id=inside3&amp;category=3" class="external text" title="http://www2.infoplace.co.kr/bbs/list.php?id=inside3&amp;category=3">jQuery예제</a>
+                </li><li> <a href="http://cafe.naver.com/specialj.cafe?iframe_url=/ArticleRead.nhn%3Farticleid=1614" class="external text" title="http://cafe.naver.com/specialj.cafe?iframe_url=/ArticleRead.nhn%3Farticleid=1614">mobile Java &amp; jQuery 카페</a>
+                </li><li> <a href="http://cafe.naver.com/javamaker.cafe?iframe_url=/ArticleRead.nhn%3Farticleid=236" class="external text" title="http://cafe.naver.com/javamaker.cafe?iframe_url=/ArticleRead.nhn%3Farticleid=236">jQuery 카페</a>
+                </li><li> <a href="http://taeyo.net/Columns/List.aspx?SEQ=29&amp;IDX=1" class="external text" title="http://taeyo.net/Columns/List.aspx?SEQ=29&amp;IDX=1">Taeyo.NET의 jQuery 강좌</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=25" title="Edit section: Guide in italiano">edit</a>]</div><a name="Guide_in_italiano"></a><h2> Guide in italiano </h2>
+              <ul><li> <a href="http://skydiamond.org/wiki/index.php?title=JQuery" class="external text" title="http://skydiamond.org/wiki/index.php?title=JQuery">Introduzione pratica a jQuery</a> (wiki)
+                </li><li> <a href="http://www.webair.it/blog/2009/02/13/jquery-tutorial-imparare-ad-usare-jquery-da-zero/" class="external text" title="http://www.webair.it/blog/2009/02/13/jquery-tutorial-imparare-ad-usare-jquery-da-zero/">jQuery Tutorial - imparare ad usare jQuery da zero</a> by <a href="http://www.webair.it/" class="external text" title="http://www.webair.it/">WebAir </a>
+                </li><li> <a href="http://www.jquery.info/spip.php?article17" class="external text" title="http://www.jquery.info/spip.php?article17">Racchiudere il contenuto di un elemento... in un altro elemento</a>
+                </li><li> <a href="http://javascript.html.it/articoli/leggi/2255/tab-semplici-e-accessibili-con-jquery/" class="external text" title="http://javascript.html.it/articoli/leggi/2255/tab-semplici-e-accessibili-con-jquery/">Interfaccia Tab-based semplice e accessibile con jQuery</a>
+                </li><li> <a href="http://www.online--bingo.com/" class="external text" title="http://www.online--bingo.com">Cardboards</a>
+                </li><li> <a href="http://javascript.html.it/articoli/leggi/2440/le-basi-di-jquery/" class="external text" title="http://javascript.html.it/articoli/leggi/2440/le-basi-di-jquery/">Le basi di JQuery</a>
+                </li><li> <a href="http://javascript.html.it/articoli/leggi/2496/xtodo-gestiamo-i-nostri-progetti-con-ajax-e-jquery/" class="external text" title="http://javascript.html.it/articoli/leggi/2496/xtodo-gestiamo-i-nostri-progetti-con-ajax-e-jquery/">XTo-Do: gestiamo i nostri progetti con AJAX e JQuery</a>
+                </li><li> <a href="http://javascript.html.it/articoli/leggi/2538/estendiamo-jquery-con-i-plugin/" class="external text" title="http://javascript.html.it/articoli/leggi/2538/estendiamo-jquery-con-i-plugin/">Estendiamo JQuery con i plugin</a>
+                </li><li> <a href="http://javascript.html.it/articoli/leggi/2946/jquery-13/" class="external text" title="http://javascript.html.it/articoli/leggi/2946/jquery-13/">Introduzione a JQuery 1.3</a>
+                </li><li> <a href="http://www.albertobottarini.com/?postid=42" class="external text" title="http://www.albertobottarini.com/?postid=42">jQuery, scope e parametri</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=26" title="Edit section: Tutorial Bahasa Indonesia">edit</a>]</div><a name="Tutorial_Bahasa_Indonesia"></a><h2> Tutorial Bahasa Indonesia </h2>
+              <p>by <a href="http://gawibowo.com/" class="external text" title="http://gawibowo.com">gawibowo</a>:
+              </p>
+              <ul><li> <a href="http://gawibowo.com/script-ajax-sederhana-menggunakan-jquery.htm" class="external text" title="http://gawibowo.com/script-ajax-sederhana-menggunakan-jquery.htm">Tutorial AJAX sederhana menggunakan fungsi load()</a>
+                </li><li> <a href="http://gawibowo.com/submit-form-dengan-ajax-menggunakan-jquery.htm" class="external text" title="http://gawibowo.com/submit-form-dengan-ajax-menggunakan-jquery.htm">Submit Form Dengan AJAX Menggunakan jQuery</a>
+                </li><li> <a href="http://gawibowo.com/mengatasi-konflik-horizontal-antara-jquery-dan-mootools.htm" class="external text" title="http://gawibowo.com/mengatasi-konflik-horizontal-antara-jquery-dan-mootools.htm">Mengatasi konflik Antara jQuery dengan framework javascript lainnya</a>
+                </li><li> <a href="http://gawibowo.com/validasi-form-menggunakan-jquery-validation-plugin.htm" class="external text" title="http://gawibowo.com/validasi-form-menggunakan-jquery-validation-plugin.htm">Validasi form menggunakan plugin validation</a>
+                </li><li> <a href="http://gawibowo.com/shoutbox-sederhana-berbasis-ajax.htm" class="external text" title="http://gawibowo.com/shoutbox-sederhana-berbasis-ajax.htm">Shoutbox Sederhana Berbasis Ajax</a>
+                </li></ul>
+              <p>by web valuer:
+              </p>
+              <ul><li> <a href="http://www.webvaluer.org/tutorials/jquery-indo/" class="external text" title="http://www.webvaluer.org/tutorials/jquery-indo/">Sederhana JQuery Tutorial</a>
+                </li><li> <a href="http://otimizacao-de-sites.org/" class="external text" title="http://otimizacao-de-sites.org/">Otimização de Sites</a> jquery ottimizzazione del codice
+                </li><li> <a href="http://www.juziku.cn/" class="external text" title="http://www.juziku.cn/">jQuery</a>
+                </li></ul>
+              <p>by <a href="http://gedex.web.id/" class="external text" title="http://gedex.web.id">gedex</a>:
+              </p>
+              <ul><li> <a href="http://gedex.web.id/archives/2008/09/21/memulai-jquery/" class="external text" title="http://gedex.web.id/archives/2008/09/21/memulai-jquery/">Memulai jQuery</a>
+                </li><li> <a href="http://gedex.web.id/archives/2008/09/27/belajar-jquery-dengan-firebug/" class="external text" title="http://gedex.web.id/archives/2008/09/27/belajar-jquery-dengan-firebug/">Belajar jQuery dengan firebug</a>
+                </li><li> <a href="http://otimizacao-de-sites.org/criacao-de-sites/" class="external text" title="http://otimizacao-de-sites.org/criacao-de-sites/">Criação de sites</a> jquery crizzazione del site
+                </li><li> <a href="http://gedex.web.id/archives/2009/02/11/delegasi-event-dan-event-bubbling-di-jquery/" class="external text" title="http://gedex.web.id/archives/2009/02/11/delegasi-event-dan-event-bubbling-di-jquery/">Delegasi Event dan Event Bubbling di jQuery</a>
+                </li></ul>
+              <p>by <a href="http://tutorial-jquery.blogspot.com/" class="external text" title="http://tutorial-jquery.blogspot.com/">Yudhi Armyndharis</a>:
+              </p>
+              <ul><li> <a href="http://tutorial-jquery.blogspot.com/search/label/Belajar%20Jquery%20Bag.%20I" class="external text" title="http://tutorial-jquery.blogspot.com/search/label/Belajar%20Jquery%20Bag.%20I">Tutorial jQuery Bag. I</a>
+                </li><li> <a href="http://tutorial-jquery.blogspot.com/search/label/Dasar%20jQuery" class="external text" title="http://tutorial-jquery.blogspot.com/search/label/Dasar%20jQuery">Tutorial Dasar jQuery</a>
+                </li><li> <a href="http://online-bachelor-degree-news.blogspot.com/" class="external text" title="http://online-bachelor-degree-news.blogspot.com">jQuery Tips Dan Trick</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=27" title="Edit section: Учебники по-русски">edit</a>]</div><a name=".D0.A3.D1.87.D0.B5.D0.B1.D0.BD.D0.B8.D0.BA.D0.B8_.D0.BF.D0.BE-.D1.80.D1.83.D1.81.D1.81.D0.BA.D0.B8"></a><h2> Учебники по-русски </h2>
+              <p><b>Уроки, документация и примеры по jQuery:</b>
+              </p>
+              <ul><li> <b><a href="http://xhtml.co.il/ru/page-1013/jQuery.browser" class="external text" title="http://xhtml.co.il/ru/page-1013/jQuery.browser">Лучшее руководство на русском языке</a></b> - сотни примеров, объяснение по каждой функции.
+                </li><li> <b><a href="http://www.rsdn.ru/article/inet/jQuery.xml" class="external text" title="http://www.rsdn.ru/article/inet/jQuery.xml">jQuery – Javascript нового поколения</a></b> - статья, описывающая практически все аспекты использования jQuery.
+                </li><li> <b><a href="http://flora.org.ru/category/programmirovanie/jquery/" class="external text" title="http://flora.org.ru/category/programmirovanie/jquery/">Некоторые переводы. Примеры. Подсказки</a></b> - примеры, подсказки и обсуждения. Перевод руководств "15 дней с jQuery", "jQuery - это очень просто!".
+                </li><li> <b><a href="http://black-zorro.com/mediawiki/%D0%A7%D0%B0%D1%81%D1%82%D1%8C_%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE_jquery" class="external text" title="http://black-zorro.com/mediawiki/Часть_первая_про_jquery">Часть первая про jQuery</a></b> и <b><a href="http://black-zorro.com/mediawiki/%D0%A7%D0%B0%D1%81%D1%82%D1%8C_%D0%B2%D1%82%D0%BE%D1%80%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE_jquery" class="external text" title="http://black-zorro.com/mediawiki/Часть_вторая_про_jquery">Часть вторая</a></b> - две части авторских материалов посвященных jQuery.
+                </li><li> <b><a href="http://www.linkexchanger.su/category/jquery-dokumentaciya" class="external text" title="http://www.linkexchanger.su/category/jquery-dokumentaciya">Документация jQuery</a></b> - документация jQuery на русском языке.
+                </li><li> <b><a href="http://anton.shevchuk.name/javascript/jquery-for-beginners/" class="external text" title="http://anton.shevchuk.name/javascript/jquery-for-beginners/">jQuery для начинающих. Часть 1</a></b>, <b><a href="http://anton.shevchuk.name/javascript/jquery-for-beginners-2/" class="external text" title="http://anton.shevchuk.name/javascript/jquery-for-beginners-2/">Часть 2. JavaScript Меню</a></b>, <b><a href="http://anton.shevchuk.name/javascript/jquery-for-beginners-ajax/" class="external text" title="http://anton.shevchuk.name/javascript/jquery-for-beginners-ajax/">Часть 3. AJAX</a></b>, <b><a href="http://anton.shevchuk.name/javascript/jquery-for-beginners-selectors/" class="external text" title="http://anton.shevchuk.name/javascript/jquery-for-beginners-selectors/">Часть 4. Селекторы</a></b> -  цикл авторских статей и переводов:
+                </li><li> <b><a href="http://ajaxed.ru/kak-ispolzovat-jquery-s-drugimi-bibliotekami/" class="external text" title="http://ajaxed.ru/kak-ispolzovat-jquery-s-drugimi-bibliotekami/">Как использовать jQuery с другими библиотеками&nbsp;?</a></b>
+                </li><li> <b><a href="http://vremenno.net/js/jquery-snippets/" class="external text" title="http://vremenno.net/js/jquery-snippets/">Cниппеты jQuery часть 1</a>, <a href="http://vremenno.net/js/jquery-snippets-2/" class="external text" title="http://vremenno.net/js/jquery-snippets-2/">часть 2</a>, <a href="http://vremenno.net/js/jquery-snippets-3/" class="external text" title="http://vremenno.net/js/jquery-snippets-3/">часть 3</a></b> - серия jQuery сниппетов.
+                </li><li> <b><a href="http://ajaxed.ru/klassnyj-ajax-vypadayushhij-spisok/" class="external text" title="http://ajaxed.ru/klassnyj-ajax-vypadayushhij-spisok/">Классный ajax выпадающий список</a></b>
+                </li><li> <b><a href="http://tech4web.ru/archives/7" class="external text" title="http://tech4web.ru/archives/7">Превьюшки картинок при помощи jQuery</a></b>
+                </li><li> <b><a href="http://jquerys.ru/" class="external text" title="http://jquerys.ru">Сайт про jQuery обучение, уроки, плагины</a></b>
+                </li><li> <b><a href="http://jquery-docs.ru/" class="external text" title="http://jquery-docs.ru">Русская документация по jQuery</a></b> - Перевод официальной документации jQuery на русский язык
+                </li><li> <b><a href="http://slyweb.ru/jquerymain/" class="external text" title="http://slyweb.ru/jquerymain/">Документация на русском</a></b> - Перевод официальной документации, все "живые" примеры с официального сайта и хорошая навигация!
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=28" title="Edit section: Tutoriais em português">edit</a>]</div><a name="Tutoriais_em_portugu.C3.AAs"></a><h2> Tutoriais em português </h2>
+              <ul><li> <a href="http://www.jquerymagazine.com.br/" class="external text" title="http://www.jquerymagazine.com.br/">Revista jQuery Magazine</a> Revista jQuery Magazine!
+                </li><li> <a href="http://groups.google.com/group/jquery-br/" class="external text" title="http://groups.google.com/group/jquery-br/">Grupo jQuery-Br</a> Lista de discussão sobre jQuery do Brasil!
+                </li><li> <a href="http://ruancarlos.com.br/Blog" class="external text" title="http://ruancarlos.com.br/Blog">Ruan Carlos Desenvolvimento</a>Blog que fala muito sobre jQuery mostrando muitos plugins bons!
+                </li><li> <a href="http://simplesideias.com.br/redescobrindo-o-javascript-com-jquery/" class="external text" title="http://simplesideias.com.br/redescobrindo-o-javascript-com-jquery/">Redescobrindo o Javascript com JQuery</a> Breve introdução
+                </li><li> <a href="http://blog.andrefaria.com/jquery-poder-e-simplicidade" class="external text" title="http://blog.andrefaria.com/jquery-poder-e-simplicidade">jQuery Poder e Simplicidade</a> Introdução, apresentação dos recursos e motivação.
+                </li><li> <a href="http://simplesideias.com.br/usando-jquery-na-pratica/" class="external text" title="http://simplesideias.com.br/usando-jquery-na-pratica/">Usando jQuery na prática</a> Tutorial sobre seletores com exemplos práticos
+                </li><li> <a href="http://i18n.2kminterativa.com.br/jquery/jquery-getting-started-pt_br.html" class="external text" title="http://i18n.2kminterativa.com.br/jquery/jquery-getting-started-pt_br.html">Por onde começar com o jQuery</a> Tradução para o português do Brasil do tutorial <a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery" title="Tutorials:Getting Started with jQuery">Getting Started with jQuery</a>.
+                </li><li> <a href="http://logon.com.pt/2007/04/26/tabelas-as-riscas-ii-dom-scripting-jquery/" class="external text" title="http://logon.com.pt/2007/04/26/tabelas-as-riscas-ii-dom-scripting-jquery/">Tabelas “às riscas” II - DOM Scripting / jQuery</a> (Zebra striping) Como fazer tabelas "às riscas" (zebra striping): primeiramente com <a href="http://logon.com.pt/2007/04/17/tabelas-as-riscas-parte1/" class="external text" title="http://logon.com.pt/2007/04/17/tabelas-as-riscas-parte1/">HTML e PHP</a>, logo com Javascript DOM Scripting e finalmente com jQuery.
+                </li><li> <a href="http://www.alexandremagno.net/blog/?p=47" class="external text" title="http://www.alexandremagno.net/blog/?p=47">FAQ Dropdown com o Jquery</a> (<a href="http://www.alexandremagno.net/blog/wp-content/uploads/2007/07/drop_down_faq.htm" class="external text" title="http://www.alexandremagno.net/blog/wp-content/uploads/2007/07/drop_down_faq.htm">demo</a>)
+                </li><li> <a href="http://www.alexandremagno.net/blog/?p=44" class="external text" title="http://www.alexandremagno.net/blog/?p=44">Ajax com o Jquery</a> (<a href="http://www.alexandremagno.net/blog/wp-content/uploads/2007/07/ajax_teste.html" class="external text" title="http://www.alexandremagno.net/blog/wp-content/uploads/2007/07/ajax_teste.html">demo</a>)
+                </li><li> <a href="http://www.alexandremagno.net/blog/?p=66#respond" class="external text" title="http://www.alexandremagno.net/blog/?p=66#respond">SWFUpload com o jQuery por Alexandre Magno</a> (<a href="http://www.alexandremagno.net/blog/wp-content/uploads/swfupload/index.htm" class="external text" title="http://www.alexandremagno.net/blog/wp-content/uploads/swfupload/index.htm">demo</a>)
+                </li><li> <a href="http://www.alexandremagno.net/blog/2008/01/30/um-padrao-de-desenvolvimento-para-plugins-do-jquery/" class="external text" title="http://www.alexandremagno.net/blog/2008/01/30/um-padrao-de-desenvolvimento-para-plugins-do-jquery/">Padrão de desenvolvimento de plugins para jQuery por Alexandre Magno</a>
+                </li><li> <a href="http://www.maujor.com/blog/2008/11/22/estilizacao-e-seletores-jquery/" class="external text" title="http://www.maujor.com/blog/2008/11/22/estilizacao-e-seletores-jquery/">Estilização e seletores jQuery</a> Fundamentos básicos de seleção e estilização com uso da biblioteca jQuery.
+                </li><li> <a href="http://www.maujor.com/blog/2009/02/03/requisicao-ajax-com-o-metodo-load-da-jquery/" class="external text" title="http://www.maujor.com/blog/2009/02/03/requisicao-ajax-com-o-metodo-load-da-jquery/">Requisição AJAX com o método load()</a>
+                </li><li> <a href="http://www.maujor.com/blog/2009/02/11/jquery-efeito-corredico-em-diferentes-direcoes/" class="external text" title="http://www.maujor.com/blog/2009/02/11/jquery-efeito-corredico-em-diferentes-direcoes/">Efeito corrediço em diferentes direções</a> Tradução do artigo <a href="http://www.learningjquery.com/2009/02/slide-elements-in-different-directions/" class="external text" title="http://www.learningjquery.com/2009/02/slide-elements-in-different-directions/">Slide Elements in Different Directions</a> de Karl Swedberg
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=29" title="Edit section: Các hướng dẫn bằng tiếng Việt">edit</a>]</div><a name="C.C3.A1c_h.C6.B0.E1.BB.9Bng_d.E1.BA.ABn_b.E1.BA.B1ng_ti.E1.BA.BFng_Vi.E1.BB.87t"></a><h2> Các hướng dẫn bằng tiếng Việt </h2>
+              <ul><li> <b><a href="http://docs.jquery.com/Tutorials:jQuery_Ho%E1%BA%A1t_%C4%90%E1%BB%99ng_Nh%C6%B0_Th%E1%BA%BF_N%C3%A0o" title="Tutorials:jQuery Hoạt Động Như Thế Nào">jQuery Hoạt Động Như Thế Nào</a></b> by <a href="http://ejohn.org/" class="external text" title="http://ejohn.org/">John Resig</a> dịch [ 0byte]<br>Giới thiệu cơ bản về jQuery và các khái niệm để bạn có thể sử dụng.<br><small><b>Tags:</b>&nbsp;<a href="http://docs.jquery.com/Category:JQuery_Core" title="Category:JQuery Core">jQuery Core</a>, <a href="http://docs.jquery.com/Category:Selectors" title="Category:Selectors">Selectors</a>, <a href="http://docs.jquery.com/Category:CSS" title="Category:CSS">CSS</a>, <a href="http://docs.jquery.com/Category:Traversing" title="Category:Traversing">Traversing</a>, <a href="http://docs.jquery.com/Category:Manipulation" title="Category:Manipulation">Manipulation</a>, <a href="http://docs.jquery.com/Category:Events" title="Category:Events">Events</a>, <a href="http://docs.jquery.com/Category:Effects" title="Category:Effects">Effects</a></small>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=30" title="Edit section: สอน jQuery ภาษาไทย">edit</a>]</div><a name=".E0.B8.AA.E0.B8.AD.E0.B8.99_jQuery_.E0.B8.A0.E0.B8.B2.E0.B8.A9.E0.B8.B2.E0.B9.84.E0.B8.97.E0.B8.A2"></a><h2> สอน jQuery ภาษาไทย </h2>
+              <ul><li> <a href="http://www.socoolidea.com/" class="external text" title="http://www.socoolidea.com">E-Learning การใช้งาน jQuery และ อื่น ๆ</a> โดย <a href="http://www.socoolidea.com/" class="external text" title="http://www.socoolidea.com">Mr.Socool</a>
+                </li><li> <a href="http://groups.google.com/group/jquery-thai" class="external text" title="http://groups.google.com/group/jquery-thai">Usergroup</a> โดย <a href="http://blog.chonla.com/" class="external text" title="http://blog.chonla.com">chonla</a>
+                </li><li> <a href="http://blog.chonla.com/" class="external text" title="http://blog.chonla.com">Tutorial ภาษาไทย</a> โดย <a href="http://blog.chonla.com/" class="external text" title="http://blog.chonla.com">chonla</a>
+                </li><li> <a href="http://www.jquerytips.com/" class="external text" title="http://www.jquerytips.com">เทคนิคการใช้งาน และการเขียน plugin</a> <a href="http://www.firmasec.com/" class="external text" title="http://www.firmasec.com">โดย Tee++;</a>
+                </li><li> <a href="http://www.jquery.in.th/" class="external text" title="http://www.jquery.in.th">คู่มือการใช้งาน ภาษาไทย</a> โดย <a href="http://www.jquery.in.th/" class="external text" title="http://www.jquery.in.th">ต้นร่มเกล้า</a>
+                </li><li> <a href="http://www.mindphp.com/" class="external text" title="http://www.mindphp.com">สอนการใช้ Jquery กับ PHP</a> โดย <a href="http://www.mindphp.com/" class="external text" title="http://www.mindphp.com">mindphp</a>
+                </li><li> <a href="http://www.mindphp.com/forums/viewforum.php?f=18" class="external text" title="http://www.mindphp.com/forums/viewforum.php?f=18">เว็บบอร์ดพูดคุยเรื่อง Jquery</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=31" title="Edit section: สอนการใช้งาน Effect ภาษาไทย">edit</a>]</div><a name=".E0.B8.AA.E0.B8.AD.E0.B8.99.E0.B8.81.E0.B8.B2.E0.B8.A3.E0.B9.83.E0.B8.8A.E0.B9.89.E0.B8.87.E0.B8.B2.E0.B8.99_Effect_.E0.B8.A0.E0.B8.B2.E0.B8.A9.E0.B8.B2.E0.B9.84.E0.B8.97.E0.B8.A2"></a><h3> สอนการใช้งาน Effect ภาษาไทย </h3>
+              <ul><li> <a href="http://www.jquery.in.th/jquery-effect-show-advance" class="external text" title="http://www.jquery.in.th/jquery-effect-show-advance">การใช้งาน Effect show ขึ้นสูง (Advance)</a> โดย <a href="http://www.jquery.in.th/" class="external text" title="http://www.jquery.in.th">ต้นร่มเกล้า</a>
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=32" title="Edit section: Ditey">edit</a>]</div><a name="Ditey"></a><h2> Ditey</h2>
+              <ul><li> <a href="http://www.pembeli.net/;cl=2008041100-jquery-$-document-read-" class="external text" title="http://www.pembeli.net;cl=2008041100-jquery-$-document-read-">jQuery - $(document).ready() a Selektory</a>.
+                </li><li> <a href="http://www.gizemli.net/;cl=2008042400-jquery-xpath-selektory" class="external text" title="http://www.gizemli.net;cl=2008042400-jquery-xpath-selektory">jQuery - XPath selektory</a>.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=33" title="Edit section: Hebrew Tutorial">edit</a>]</div><a name="Hebrew_Tutorial"></a><h2> Hebrew Tutorial </h2>
+              <ul><li> <a href="http://xhtml.co.il/he/page-700/jQuery" class="external text" title="http://xhtml.co.il/he/page-700/jQuery">Xhtml.co.il בית הספר </a>
+                </li></ul>
+              <p>מאות דוגמאות ,jQuery מדריך לימוד ודוקומנטציה - Xhtml.co.il בית הספר
+              </p>
+              <ul><li> <a href="http://www.internet-israel.com/internet/category/%D7%91%D7%A0%D7%99%D7%99%D7%AA-%D7%90%D7%AA%D7%A8%D7%99%D7%9D/jquery/" class="external text" title="http://www.internet-israel.com/internet/category/בניית-אתרים/jquery/">אינטרנט ישראל</a> - מדריך ודוקומנטציה בעברית ללימוד JQuery.
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=34" title="Edit section: Hrvatski vodič za jQuery">edit</a>]</div><a name="Hrvatski_vodi.C4.8D_za_jQuery"></a><h2> Hrvatski vodič za jQuery </h2>
+              <ul><li> <a href="http://www.tomislavdekovic.iz.hr/clanci/jquery.html" class="external text" title="http://www.tomislavdekovic.iz.hr/clanci/jquery.html">jQuery ukratko</a> - vodič za jQuery početnike na hrvatskom
+                </li></ul>
+              <div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://docs.jquery.com/action/edit/Tutorials?section=35" title="Edit section: دروس باللغة العربية">edit</a>]</div><a name=".D8.AF.D8.B1.D9.88.D8.B3_.D8.A8.D8.A7.D9.84.D9.84.D8.BA.D8.A9_.D8.A7.D9.84.D8.B9.D8.B1.D8.A8.D9.8A.D8.A9"></a><h2> دروس باللغة العربية </h2>
+              <ul><li> <a href="http://sharepoint4arab.blogspot.com/2009/04/arabic-jquery-help.html" class="external text" title="http://sharepoint4arab.blogspot.com/2009/04/arabic-jquery-help.html">الترجمة العربية لملفات المساعدة لمكتبة jQuery</a> من قبل <a href="http://sharepoint4arab.blogspot.com/" class="external text" title="http://sharepoint4arab.blogspot.com">إسماعيل عنجريني</a>
+                </li></ul>
+              <ul><li> <a href="http://blogger-lu2a.blogspot.com/2009/09/jquery.html" class="external text" title="http://blogger-lu2a.blogspot.com/2009/09/jquery.html">تعلم الـ jquery منذ البداية</a>
+                </li></ul>
+              <pre>من قبل <a href="http://www.lu2a.blogspot.com/" class="external text" title="http://www.lu2a.blogspot.com">وائل عبد اللطيف</a>
+              </pre><!--
+              Pre-expand include size: 248896 bytes
+              Post-expand include size: 41972 bytes
+              Template argument size: 34637 bytes
+              Maximum: 2097152 bytes
+              -->
+
+              <!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:1579-0!1!0!!en!2 and timestamp 20110325173313 -->
+              <div class="printfooter">
+                Retrieved from "<a href="http://docs.jquery.com/Tutorials">http://docs.jquery.com/Tutorials</a>"</div>
+              <!-- end content -->
+              <div class="visualClear"></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#primaryContent -->
+
+
+
+
+    </div><!-- /#content -->
+
+  </div><!-- /#siteContain -->
+
+  <script type="text/javascript">
+  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1076265-1']); _gaq.push(['_trackPageview']); _gaq.push(['_setDomainName', '.jquery.com']);
+  (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);})();
+  </script>
+  <!-- Cached 20110325173313 -->
+</body></html>

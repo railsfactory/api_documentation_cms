@@ -1,0 +1,19 @@
+<%=link_to "<< Back", "/"%>
+<%= api_methods_loop(@api, @api_methods) %>
+</div>
+<div id="jq-primaryContent" style="width:850px; min-height: 133.7em;">
+  <%=render :partial=>"method_desc"%>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.apilist').click(function(){
+      if($(this).siblings('.jq-pBody').css('display')=="none")
+        $($(this).children('img')).attr('src','/images/arrow-up.png');
+      else
+        $($(this).children('img')).attr('src','/images/arrow-down.png');
+      $(this).siblings('.jq-pBody').slideToggle('fast');
+    });
+    $('#api_<%=@api_method.api_list_id%>').click();
+  });
+</script>

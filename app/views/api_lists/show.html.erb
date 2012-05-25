@@ -1,0 +1,18 @@
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Name:</b>
+    <%= @api_list.name %>
+  </p>
+
+  <p>
+    <b>Status:</b>
+    <%= @api_list.status %>
+  </p>
+
+  <p style="font-size:16px;">
+    <%= link_to 'Edit', edit_api_list_path(@api_list) %> |
+    <%= link_to 'Back', api_lists_path %>
+  </p>
+</div>

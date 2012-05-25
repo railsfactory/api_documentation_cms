@@ -1,0 +1,26 @@
+<div id="jq-primaryContent" style="width:1172px; min-height:46em;">
+  <div id="jq-interior">
+    <div style="float:left;width:48%;margin-right:4%;">
+      <h3><%=link_to "Getting Started","/getting_started",:style=>"font-size :16px;"%></h2>
+      <p>A secure platform that allows you to capture content in meetings and share it securely with colleagues</p>
+      <p>Analyze key metrics related to your meetings</p>
+      <p>Create private distribution lists and share content with targeted team members</p>
+      <p>Monitor meeting topics and track followup action items</p>
+      <p>Provide a variety of templates that allow you to capture content based on your job function</p>
+      <h3><%=link_to "Authentication Documentation",auth_doc_path,:style=>"font-size :16px;"%></h2>
+			      <p>  This document is for application developers to authenticate/authorize their request with Spree. Spree allows access to the protected data only for the authorized users.</p>
+      <p>The authentication might be token based for the Spree applications and oAuth for the other applications. This enables third-party developers to build applications that can fetch data on behalf of Spree users without the need to first obtain their usernames and passwords.</p>
+     
+    </div>
+    <div style="float:left;width:48%;">
+     <h3><%=link_to "API Documentation",link_to_method,:style=>"font-size :16px"%></h2>
+ <p> This document is written for application developers using the Spree Data APIs to access a user's data. This enables third-party developers to build applications that can fetch data on behalf of Spree users.</p>
+      <p>This document explains the basic functionalities of the API methods to access the protected resource. You can find here all the methods available in Spree API. To know more jump right into the API resource documentation. Before using the Spree API you need to do register in Spree.</p>
+      <p></p>
+      <h3><%=link_to "Error Codes",error_code_path,:style=>"font-size :16px;"%></h2>
+      <p>Spree API will return the error code for the failed request or actions. Which helps the developers to know the exact reason for the failure.</p> 
+      <h3><%=link_to "Http Codes",http_code_path,:style=>"font-size :16px;"%></h2>
+      <p>The Spree REST APIs use the HTTP protocol for sending and retrieving data. Client code utilizing the REST APIs make an HTTP request to the Spree Service provider and process the HTTP response accordingly. Included with the HTTP response data is the HTTP response code. The response code gives the client some indication as to the success of the HTTP request, and can provide information on how the client should handle the included response data. Please follow the above link to know more about the HTTP status.</p>
+    </div>
+  </div>
+</div>

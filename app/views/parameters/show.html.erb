@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Api method:</b>
+  <%= @parameter.api_method_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @parameter.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @parameter.description %>
+</p>
+
+<p>
+  <b>Validation:</b>
+  <%= @parameter.validation %>
+</p>
+
+<p>
+  <b>Is request:</b>
+  <%= @parameter.is_request %>
+</p>
+
+
+<%= link_to 'Edit', edit_parameter_path(@parameter) %> |
+<%= link_to 'Back', parameters_path %>

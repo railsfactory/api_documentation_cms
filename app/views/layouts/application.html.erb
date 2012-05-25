@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SpreeApiDocument</title>
+    <%= stylesheet_link_tag 'reset','screen','jquery' %>
+    <%= javascript_include_tag "jquery-1.6.2.min.js", "jquery.rails.js", "custom" %>
+
+    <!--script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js"></script>
+    <script src="http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js"></script-->
+    <%= csrf_meta_tag %>
+<%#=stylesheet_link_tag 'reset','screen'%>
+    <%= favicon_link_tag 'favicon.ico', :type => 'image/x-icon' %>
+    <%= init_tinymce_hammer_if_required %>
+    <script>
+      $(document).ready(function(){
+        $('.apilist').click(function(){
+          if($(this).siblings('.jq-pBody').css('display')=="none")
+            $($(this).children('img')).attr('src','/images/arrow-up.png');
+          else
+            $($(this).children('img')).attr('src','/images/arrow-down.png');
+          $(this).siblings('.jq-pBody').slideToggle('fast');
+        });
+<%if !@api_method.nil?%>
+      $('#api_<%=@api_method.api_list_id%>').click();
+<%end%>
+    /*$(".getting_started").click(function(){
+   $.ajax({
+                    type: 'POST',
+                   url:"/getting-started",
+                   success: function(data) {$('#jq-primaryContent').html(data);
+                   $(".jq-pBody").css({'display' : 'none'})
+                   $('.apilist').children('img').attr('src','/images/arrow-down.png');
+                   $('#jq-primaryNavigation ul li').removeClass('jq-current');
+                   $('.jq-about').addClass('jq-current');
+                   }
+                   });
+                   return false;
+});
+<%if params[:action]=="getting_started"%>
+  $('.getting_started').trigger('click');
+<%end%>*/
+<%if params[:controller]=="home"%>
+      $(".jq-pBody").css({'display' : 'none'})
+      $('.apilist').children('img').attr('src','/images/arrow-down.png');
+<%end%>
+  });
+
+    </script>
+
+  </head>
+  <body class="mediawiki ns-0 ltr jq-enhanced" id="jq-interior">
+    <div id="jq-siteContain" style="width:1246px;">
+      <div id="jq-header">
+        <%=link_to "Spree API Doc","/",:id=>"jq-siteLogo",:style=>"top:10px;"%>
+        <div id="jq-primaryNavigation">
+          <ul>
+            <%p params[:action]== "error_code"%>
+            <li class="jq-about <%=params[:action].strip== "getting_started" ? "jq-current" : ""%>"><a title="Getting Started"  href="/">Getting Started</a></li>
+            <li class="jq-plugins <%=params[:action].strip== "method_desc" ? "jq-current" : ""%>"><a title="API Methods" href="/methods/2">API Methods</a></li>
+            <!--<li class="jq-jquery <%=params[:action]== "downloads" ? "jq-current" : ""%>"><a title="Download" href="<%=api_doc_download_path%>">Download</a></li>-->
+            <li class="jq-forum <%=params[:action]== "error_code" ? "jq-current" : ""%>"><a title="ErrorCodes" href="<%=error_code_path%>">ErrorCodes</a></li>
+            <li class="jq-blog <%=params[:action].strip== "http_code" ? "jq-current" : ""%>"><a title="HttpCodes" href="<%=http_code_path%>">HttpCodes</a></li>
+            <li class="jq-blog <%=params[:action].strip== "settings" ? "jq-current" : ""%>"><a title="Settings" href="/settings">Settings</a></li>
+            <!--<li class="jq-donate"><a title="Donate to jQuery" href="http://jquery.org/donate">Donate</a></li>-->
+            <% if current_user %>
+              <li class="jq-blog <%=params[:action].strip== "" ? "jq-current" : ""%>"><a title="Api Methods" href="<%=api_methods_path%>">Methods</a></li>
+              <li class="jq-blog <%=params[:action].strip== "" ? "jq-current" : ""%>"><a title="Api Lists" href="<%=api_lists_path%>">Api Lists</a></li>
+              <li class="jq-blog <%=params[:action].strip== "destroy" ? "jq-current" : ""%>"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+            <% end %>
+          </ul>
+        </div>
+        <!--<h1>Documentation</h1>-->
+      </div><!-- /#secondaryNavigation -->
+      <div id="jq-content" class="jq-clearfix">
+        <%= render :partial=>"api_methods/methods"%>
+        <%= yield %>
+      </div>
+      <div id="jq-footer" class="jq-clearfix">
+        <p id="jq-copyright" align="center">2012 copyright@<a href="http://www.railsfactory.com/">RailsFactory</a></p><p id="jq-hosting"></p>
+      </div>
+  </body>
+</html>

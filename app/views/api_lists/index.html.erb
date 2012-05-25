@@ -1,0 +1,14 @@
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <h1 style="font-size:18px">Listing api_lists</h1>
+  <table>
+    <tr>
+      <th  style="font-size:16px;text-align:left;">Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    </tr>
+    <%= list_content(@api_lists) %>
+  </table>
+
+  <br />
+  <p style="font-size:16px;">
+    <%= link_to 'New Api list', new_api_list_path %>
+  </p>
+</div>

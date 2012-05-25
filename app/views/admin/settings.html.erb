@@ -1,0 +1,53 @@
+<div id="jq-primaryContent" style="width:867px; min-height: 133.7em;">
+  <h1 style="font-size:18px">Settings</h1>
+  <div style="color:#088A08; font-size:14px;"><%= flash[:success]%></div>
+  <br />
+  <form name="edit_enable" action="/update_settings" method="put">
+    <p style="font-size:16px;">
+      <% status = if @user.edit_enable == true
+        true
+      else
+        false
+      end %>
+      <%= check_box_tag 'admin[edit_enable]', status, status %> Enable Testing
+    </p>
+    <div style="display:<%= @user.access_token != '' ? 'block' : 'none'%>;" class="ed_accesstoken">
+      <label style="font-size: 14px;">Request url:</label><br/>
+      <input type="text" name="admin[api_url]" id="admin_api_url" value="<%= @user.api_url%>"/><br/><br/>
+      <label style="font-size: 14px;">Access token:</label><br/>
+      <input type="text" name="admin[access_token]" id="admin_access_token" value="<%= @user.access_token%>"/><br/><br/>
+    </div>
+    <input type="submit" name="submit" class="sub_settings" value="Save"/>
+  </form>
+</div>
+<script type="text/javascript">
+  $('#admin_edit_enable').live('click',function(){
+    if($("input[name='admin[edit_enable]']").is(':checked')) {
+      $(".ed_accesstoken").css({'display' : 'block'});
+      $("#admin_edit_enable").attr('value','true');
+      $("#admin_access_token").val('<%= @user.access_token%>');
+      $("#admin_api_url").val('<%= @user.api_url%>');
+    } else {
+      $(".ed_accesstoken").css({'display' : 'none'});
+      $("#admin_edit_enable").attr('value','false');
+      $("#admin_access_token").val('');
+      $("#admin_api_url").val('');
+    }
+  });
+  $(".sub_settings").click(function() {
+    if($("input[name='admin[edit_enable]']").is(':checked')) {
+      if($("#admin_api_url").val()=='') {
+        alert("Please provide request url");
+        $("#admin_api_url").focus();
+        return false;
+      }
+      if($("#admin_access_token").val()=='') {
+        alert("Please provide access token");
+        $("#admin_access_token").focus();
+        return false;
+      }
+    }
+  });
+
+
+</script>

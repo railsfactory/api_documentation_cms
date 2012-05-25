@@ -1,0 +1,21 @@
+<div id="jq-primaryContent" style="width:1132px">
+
+  <h1>Listing static_pages</h1>
+
+  <table>
+    <tr>
+      <th style="font-size:16px;">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th style="font-size:16px;">Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <%= static_page_lists(@static_pages) %>
+  </table>
+
+  <br />
+  <p style="font-size:16px;">
+    <%= link_to 'New Static page', new_static_page_path %>
+  </p>
+</div>

@@ -1,0 +1,16 @@
+Authentication/Authorization Failed:
+  2032: Username/Password is incorrect
+  2034: Sorry email already taken
+  2041: You do not have permission to make this API call 
+  2042: Authentication token is not valid
+Invalid Parameter:
+  2038: A Parameter is Missing/Invalid
+Conditions Failed:
+  2031: No items to checkout 
+  2036: Payment failed check the details entered
+  2039: Bad request
+  2040: Something went wrong check parameters
+Output Result:
+  2033: Logged out sucessfully
+  2035: Destroyed
+  2037: Record not found

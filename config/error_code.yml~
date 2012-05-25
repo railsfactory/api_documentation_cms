@@ -1,0 +1,149 @@
+Authentication/Authorization Failed:
+  1001: Username/Password is incorrect
+  1002: You do not have permission to make this API call 
+  1003: Account is locked or inactive 
+  1004: Authentication/Authorization Failed
+  1005: Token is not valid
+Missing Parameter:
+  2001: firstname - Enter First name
+  2002: lastname - Enter Last name
+  2003: date_of_birth - Select Date
+  2004: date_of_birth - Select Month
+  2005: date_of_birth - Enter Year
+  2006: email - Enter Email Address
+  2007: password - Enter Password
+  2008: password_confirmation - Your confirmation password doesn't match
+  2009: home_phone - Enter phone number
+  2010: mobile_phone - Enter mobile number
+
+  2011: street - Enter Street
+  2012: city - Enter City
+  2013: state - Enter State
+  2014: zipcode - Enter Zip/Postal code
+  2015: country - Select your country
+  2016: address - Enter Address
+  2017: relationship - Please select the relationship of carer
+  2018: access - Select Access
+  2019: emergency_relationship - Enter your relationship
+  2020: alert - Enter the alert name
+
+  2021: risk - Select the risk level
+  2022: medication - Enter the medication details
+  2023: symptoms - Enter the symptoms and medical instructions
+  2024: medication_file - Upload the File type [doc or pdf]
+  2025: approved_care_instructions - Please check this approval
+  2026: gender - Select Gender
+  2027: blood_type - Select Blood type
+  2028: organ_donor - Enter Organ Donor
+  2029: private_health_insurance - Enter Private health insurance
+  2030: ambulance_insurance - Enter Ambulance insurance
+
+  2031: immunization_name - Enter Immunization name
+  2032: immunization_date - Select Date
+  2033: immunization_date - Enter Year
+  2034: operation_name - Enter Procedure name
+  2035: operation_date - Select Date
+  2036: operation_date - Enter Year
+  2037: operation_description - Enter description
+  2038: family_history_condition - Enter Condition
+  2039: family_history_notes - Enter Notes
+  2040: family_history_copy - Select Name 
+
+  2041: other_notes - Enter Information
+  2042: private_notes - Enter Information
+  2043: predefined_alert - Please enter Alert name
+  2044: condition - Please enter Condition name
+  2045: search - Please enter valid text for search
+  2046: user_id - Required parameter is missing
+  2047: owner_id - Required parameter is missing
+  2048: subject_id - Required parameter is missing
+  2049: attachable_id - Required parameter missing
+  2050: attachable_type - Required parameter missing
+
+  2051: attachment_id - Required parameter missing
+  2052: file_name - Required parameter missing
+  2053: file_type - Required parameter missing
+  2054: subject_id - Required parameter missing
+  2055: carer_id - Required parameter missing
+  2056: carer_subject_id - Required parameter missing
+  2057: old_owner_id - Required parameter missing
+  2058: new_owner_id - Required parameter missing
+  2059: immunisation_id - Required parameter missing
+  2060: operation_id - Required parameter missing
+
+  2061: family_history_id - Required parameter missing
+  2062: emergency_contact_id - Required parameter missing
+  2063: safety_alert_id - Required parameter missing
+
+Invalid Parameter:
+  3001: A Parameter is Invalid  Unable to identify parameter
+  3002: firstname - Invalid first name
+  3003: firstname - Your First name too short! Add a few more letters
+  3004: firstname - Too long! Maximum 40 characters
+  3005: lastname- Invalid last name
+  3006: lastname- Your Last name too short! Add a few more letters
+  3007: lastname- Too long! Maximum 40 characters
+  3008: date_of_birth - Your Birth date should not be greater than today
+  3009: date_of_birth - Year should contain only 4 digits
+  3010: email - Invalid email address
+
+  3011: email - That email address is already taken. Try another, please!
+  3012: password - Your password should be at least 6 characters long
+  3013: password - Your password should be less than 32 characters long
+  3014: password_confirmation - Sorry, that password don't match
+  3015: terms_of_Service - You must agree to the terms of service
+  3016: home_phone - Invalid Phone number
+  3017: home_phone - Too short! Enter valid number
+  3018: home_phone - Too long! Maximum 15 digits
+  3019: mobile_phone - Invalid Mobile number
+  3020: mobile_phone - Too short! Enter valid number
+
+  3021: mobile_phone - Too long! Maximum 15 digits
+  3022: street - Too short! Add a few more letters
+  3023: street- Too long! Maximum 40 characters
+  3024: city - Too short! Add a few more letters
+  3025: city- Too long! Maximum 40 characters
+  3026: state - Too short! Add a few more letters
+  3027: state- Too long! Maximum 40 characters
+  3028: zipcode - Too short! Add a few more letters
+  3029: zipcode - Too long! Maximum 40 characters
+  3030: current_password - Password size should be within 6-32
+
+  3031: new_password - Password size should be within 6-32
+  3032: confirm_new_password - Password size should be within 6-32
+  3033: address - Too short! Add a few more letters
+  3034: address - Too long! Maximum 40 characters
+  3035: avatar - Invalid file type. Please upload a different File type.
+  3036: emergency_contact - Select Copy contacts from
+  3037: medication - Medication is too short! Add a few more letters
+  3038: medication - Medication is too long! Maximum 500 characters
+  3039: symptoms - Too short! Add a few more letters
+  3040: symptoms - Too long! Maximum 500 characters
+
+  3041: medication_file - Invalid file type. Please upload a different File type.
+  3042: immunization_date - Date should not be greater than today
+  3043: immunization_date - Year should contain only 4 digits
+  3044: operation_date - Date should not be greater than today
+  3045: operation_date - Year should contain only 4 digits
+  3046: other_notes - Too long! Maximum 8000 characters
+  3047: private_notes - Too long! Maximum 8000 characters
+  3048: organ_donor - Too long! Maximum 200 characters
+  3049: private_health_insurance - Too long! Maximum 200 characters
+  3050: ambulance_insurance - Too long! Maximum 200 characters
+
+  3051: operation - Too long! Maximum 200 characters
+  3052: family_history - Too long! Maximum 200 characters
+
+Record Not Found:
+  5003: Email not found
+  5002: Record does not exist in database
+  5003: Unknown template Id/Template not found
+Upload Error:
+  6001: The file was not correctly uploaded
+  6002: The file was zero bytes in length
+  6003: The file type was not recognised
+  6004: Not an valid file format
+  6005: File size too large
+Conditions Failed:
+  7001: Conditions not satisfied
+  7002: Bad request

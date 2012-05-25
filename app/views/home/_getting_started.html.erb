@@ -1,0 +1,16 @@
+
+<h1 class="page-title" style="font-size:16px;">Getting Started</h1>
+<div style="float:left;margin-right:4%;padding-left:40px;">
+  <p>This section describes in general terms the steps you need to take when you use the Spree API. Registering in Spree application is mandatory to use the REST APIs provided</p>
+  <p>General procedure involved in using Spree API is very simple. Just follow the below steps.</p>
+  <ul style="list-style: square outside none;margin-left:50px;">
+    <li style="padding-bottom:7px;">Get the proper authorization. Do any necessary user login steps and OAuth authorization.</li>
+    <li>Set up parameters. Decide which parameters you are passing to API and set their values or retrieve those values as input from the user of your application.
+    <li>Build the request to the API. The request consists of the full URL to the API resource itself, plus the parameters and their values.
+    <li>Make the request. You invoke each request with its appropriate HTTP method: GET, PUT, DELETE, or POST.
+    <li>Get the response and parse it for the data you need. Some of the data may be contained directly within the response, marked by appropriate tags, and some data may appear in the form of links to other resources.
+    <li>Use the response data to do further operations. You can use the links within a response to make other resource requests. For example, if you retrieve details about a item, the response includes URLs for categories of that item. You can use these URLs to access and display the categories.</li>
+    <li>The Spree API will return the error code for the failed request or actions. Which helps the developers to know the exact reason for the failure.</li>
+  </ul>
+  <!--p>To know more about the API methods, visit <%#=link_to "API documentation",api_method_desc_path( @api_method) %>.</p-->
+</div>
