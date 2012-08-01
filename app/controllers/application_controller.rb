@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 	before_filter :default_values
-	before_filter :http_authenticate_links
+	#before_filter :http_authenticate_links
 
   def default_values
 		@api = ApiList.all
